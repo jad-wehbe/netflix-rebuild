@@ -3,6 +3,7 @@ import BackgroundImage from "assets/Background.jpg";
 
 // Custom colours
 const red = "#E50914";
+const darkRed = "#F24423";
 const grey = "#8c8c8c";
 
 // Background
@@ -36,7 +37,10 @@ export const Header = styled.div`
     justify-content: space-between;
 `;
 
-export const Logo = styled.div``;
+export const Logo = styled.img`
+    width: 116px;
+    height: 34px;
+`;
 
 export const SignInButton = styled.button`
     background-color: ${red};
@@ -84,7 +88,6 @@ export const Span = styled.span`
 `;
 
 // Input
-
 export const SignUp = styled.form`
     display: flex;
 `;
@@ -104,6 +107,10 @@ export const SignUpButton = styled.button`
     justify-content: center;
     padding: 0 1rem;
     font-size: 1.5rem;
+
+    &:hover {
+        background-color: ${darkRed};
+    }
 `;
 
 export const Terms = styled.p`
@@ -112,7 +119,13 @@ export const Terms = styled.p`
     font-size: 1rem;
 `;
 
-export const Guest = styled.button`
+export const Guest = styled.a`
     color: #d4d4d4;
     font-size: 1rem;
+    text-decoration: none;
+    width: fit-content;
+
+    &:hover {
+        text-decoration: underline;
+    }
 `;
