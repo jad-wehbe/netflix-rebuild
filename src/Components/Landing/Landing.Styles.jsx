@@ -85,7 +85,7 @@ export const Span = styled.span`
 
 // Input
 
-export const SignUp = styled.div`
+export const SignUp = styled.form`
     display: flex;
 `;
 

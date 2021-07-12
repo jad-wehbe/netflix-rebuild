@@ -1,4 +1,6 @@
-import React from "react";
+import React, { useState } from "react";
+import { useDispatch } from "react-redux";
+import { addEmail } from "./landingSlice";
 
 import {
     Background,
@@ -16,10 +18,22 @@ import {
     SignUpButton,
     Terms,
     Guest,
-} from "./Styles";
+} from "./Landing.Styles";
+
 import logoSvg from "assets/Logo.svg";
 
 function Landing() {
+    const [email, setEmail] = useState("");
+
+    // const emailState = useSelector((state) => state.email.value);
+    const dispatch = useDispatch();
+
+    const handleSubmit = (event) => {
+        event.preventDefault();
+        dispatch(addEmail(email));
+        setEmail("");
+    };
+
     return (
         <Background>
             <BackgroundGradient>
@@ -38,8 +52,15 @@ function Landing() {
                         <Span>Ready to watch?</Span> Enter your Email:
                     </Paragraph>
                     {/* TODO: Put a label and animations */}
-                    <SignUp>
-                        <Input type="email" placeholder="Email Address" />
+                    <SignUp onSubmit={handleSubmit}>
+                        <Input
+                            type="email"
+                            placeholder="Email Address"
+                            onChange={(event) => {
+                                setEmail(event.target.value);
+                            }}
+                            value={email}
+                        />
                         <SignUpButton as="a" href="#">
                             Get Started &gt;
                         </SignUpButton>
