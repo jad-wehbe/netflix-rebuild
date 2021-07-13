@@ -105,10 +105,8 @@ export const SignUpButton = styled.button`
     display: flex;
     align-items: center;
     justify-content: center;
-    padding: 0.8rem 1rem;
-    margin: 1rem auto;
-    font-size: 1rem;
-    border-radius: 4px;
+    padding: 0 1rem;
+    font-size: 1.5rem;
 
     &:hover {
         background-color: ${darkRed};
