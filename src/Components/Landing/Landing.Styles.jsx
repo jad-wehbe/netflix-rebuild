@@ -37,7 +37,7 @@ export const Header = styled.div`
     justify-content: space-between;
 `;
 
-export const Logo = styled.img`
+export const Logo = styled.div`
     width: 116px;
     height: 34px;
 `;
