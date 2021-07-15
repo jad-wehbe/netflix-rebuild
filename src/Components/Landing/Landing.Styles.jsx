@@ -30,19 +30,20 @@ export const BackgroundGradient = styled.div`
 
 // Header
 export const Header = styled.div`
-    position: relative;
     padding-top: 30px;
     margin: 0 5%;
     display: flex;
     justify-content: space-between;
 `;
 
-export const Logo = styled.div`
+export const Logo = styled.img`
     width: 116px;
     height: 34px;
 `;
 
 export const SignInButton = styled.button`
+    color: white;
+    border: 0;
     background-color: ${red};
     align-self: center;
     padding: 7px 17px;

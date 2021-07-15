@@ -1,4 +1,5 @@
 import React, { useState } from "react";
+import { Link } from "react-router-dom";
 import { useDispatch } from "react-redux";
 import { addEmail } from "./landingSlice";
 
@@ -38,12 +39,10 @@ function Landing() {
         <Background>
             <BackgroundGradient>
                 <Header>
-                    <Logo>
-                        <img src={logoSvg} alt="Logo" />
-                    </Logo>
-                    <SignInButton as="a" href="#">
-                        Sign In
-                    </SignInButton>
+                    <Logo src={logoSvg} alt="Logo" />
+                    <Link to="/signIn">
+                        <SignInButton>Sign In</SignInButton>
+                    </Link>
                 </Header>
                 <Main>
                     <Title>Unlimited movies, TV shows, and more.</Title>
