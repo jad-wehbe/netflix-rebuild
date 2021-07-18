@@ -16,8 +16,8 @@ export const Background = styled.div`
 `;
 
 export const BackgroundGradient = styled.div`
-    position: absolute;
-    inset: 0;
+    /* position: absolute; */
+    /* inset: 0; */
     height: 100%;
     background: linear-gradient(
             180deg,
@@ -55,7 +55,8 @@ export const SignInButton = styled.button`
 // Main
 export const Main = styled.div`
     height: 90%;
-    width: 650px;
+    width: 90%;
+    max-width: 50rem;
     margin: 0 auto;
     color: white;
     display: flex;
@@ -64,10 +65,15 @@ export const Main = styled.div`
 `;
 
 export const Title = styled.h1`
+    /* font-size: 6vw; */
     font-size: 4rem;
     font-weight: 600;
     line-height: 1.2;
     text-align: center;
+
+    @media (max-width: 700px) {
+        font-size: 2rem;
+    }
 `;
 
 export const SubTitle = styled.h3`
@@ -75,6 +81,11 @@ export const SubTitle = styled.h3`
     font-weight: 400;
     margin: 3rem 0;
     text-align: center;
+
+    @media (max-width: 700px) {
+        font-size: 1rem;
+        margin: 1rem 0;
+    }
 `;
 
 export const Paragraph = styled.p`
@@ -91,26 +102,42 @@ export const Span = styled.span`
 // Input
 export const SignUp = styled.form`
     display: flex;
+
+    @media (max-width: 700px) {
+        flex-direction: column;
+    }
 `;
 
 export const Input = styled.input`
     flex: 1;
     outline: none;
-    height: 60px;
-    padding: 0 1.2rem;
+    /* height: 60px; */
+    padding: 1.2rem;
     font-size: 1rem;
+
+    @media (max-width: 700px) {
+        margin-bottom: 1.2rem;
+    }
 `;
 
 export const SignUpButton = styled.button`
     background-color: ${red};
+    color: white;
+    border: none;
     display: flex;
     align-items: center;
     justify-content: center;
-    padding: 0 1rem;
+    padding: 1rem;
     font-size: 1.5rem;
 
     &:hover {
         background-color: ${darkRed};
+    }
+
+    @media (max-width: 700px) {
+        font-size: 1rem;
+        width: 60%;
+        margin: 0 auto;
     }
 `;
 

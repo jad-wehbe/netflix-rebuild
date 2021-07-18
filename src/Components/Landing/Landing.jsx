@@ -1,5 +1,5 @@
 import React, { useState } from "react";
-import { Link } from "react-router-dom";
+import { Link, Redirect } from "react-router-dom";
 import { useDispatch } from "react-redux";
 import { addEmail } from "./landingSlice";
 
@@ -25,6 +25,7 @@ import logoSvg from "assets/Logo.svg";
 
 function Landing() {
     const [email, setEmail] = useState("");
+    const [redirect, setRedirect] = useState(false);
 
     // const emailState = useSelector((state) => state.email.value);
     const dispatch = useDispatch();
@@ -33,14 +34,19 @@ function Landing() {
         event.preventDefault();
         dispatch(addEmail(email));
         setEmail("");
+        setRedirect(true);
     };
+
+    if (redirect) {
+        return <Redirect to="/SignUp" />;
+    }
 
     return (
         <Background>
             <BackgroundGradient>
                 <Header>
                     <Logo src={logoSvg} alt="Logo" />
-                    <Link to="/signIn">
+                    <Link to="/SignIn">
                         <SignInButton>Sign In</SignInButton>
                     </Link>
                 </Header>
@@ -53,6 +59,7 @@ function Landing() {
                     {/* TODO: Put a label and animations */}
                     <SignUp onSubmit={handleSubmit}>
                         <Input
+                            required
                             type="email"
                             placeholder="Email Address"
                             onChange={(event) => {
@@ -60,7 +67,7 @@ function Landing() {
                             }}
                             value={email}
                         />
-                        <SignUpButton as="a" href="#">
+                        <SignUpButton type="submit">
                             Get Started &gt;
                         </SignUpButton>
                     </SignUp>

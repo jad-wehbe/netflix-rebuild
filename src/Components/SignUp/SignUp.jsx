@@ -1,9 +1,9 @@
 import React from "react";
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import { Link } from "react-router-dom";
-import { useDispatch } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
 
-import { checkEmail, checkPassword } from "Components/SignIn/signInSlice";
+import { addEmail, addPassword } from "Components/SignUp/signUpSlice";
 
 import {
     BackgroundGradient,
@@ -20,11 +20,11 @@ import {
     SignInButton,
     Paragraph,
     Span,
-} from "./SignIn.styles";
+} from "./SignUp.styles";
 
 import logoSvg from "assets/Logo.svg";
 
-function SignIn() {
+function SignUp() {
     const [email, setEmail] = useState("");
     const [password, setPassword] = useState("");
 
@@ -35,13 +35,20 @@ function SignIn() {
 
         const payload = { email, password };
 
-        dispatch(checkEmail(payload));
-        dispatch(checkPassword(payload));
+        dispatch(addEmail(payload));
+        dispatch(addPassword(payload));
 
         setEmail("");
         setPassword("");
     };
 
+    const emailState = useSelector((state) => state.email.email);
+
+    useEffect(() => {
+        setEmail(emailState);
+    }, [emailState]);
+
+    // console.log(email);
     return (
         <Background>
             <BackgroundGradient>
@@ -52,7 +59,7 @@ function SignIn() {
                 </Header>
                 <Form onSubmit={handleSubmit}>
                     <Container>
-                        <H2>Sign In</H2>
+                        <H2>Sign Up</H2>
                         <Input
                             required
                             type="email"
@@ -70,11 +77,11 @@ function SignIn() {
                             value={password}
                         />
 
-                        <SignInButton type="submit">SignIn</SignInButton>
+                        <SignInButton type="submit">Sign Up</SignInButton>
                         <Paragraph>
-                            New to Netflix?
+                            Already have an account?
                             <Span>
-                                <Link to="/SignUp">Sign Up Now</Link>
+                                <Link to="/SignIn">Sign In Now</Link>
                             </Span>
                         </Paragraph>
                     </Container>
@@ -84,4 +91,4 @@ function SignIn() {
     );
 }
 
-export default SignIn;
+export default SignUp;
