@@ -16,8 +16,6 @@ export const Background = styled.div`
 `;
 
 export const BackgroundGradient = styled.div`
-    /* position: absolute; */
-    /* inset: 0; */
     height: 100%;
     background: linear-gradient(
             180deg,
@@ -50,6 +48,7 @@ export const SignInButton = styled.button`
     font-weight: 600;
     font-size: 1rem;
     border-radius: 4px;
+    cursor: pointer;
 `;
 
 // Main
@@ -129,6 +128,7 @@ export const SignUpButton = styled.button`
     justify-content: center;
     padding: 1rem;
     font-size: 1.5rem;
+    cursor: pointer;
 
     &:hover {
         background-color: ${darkRed};

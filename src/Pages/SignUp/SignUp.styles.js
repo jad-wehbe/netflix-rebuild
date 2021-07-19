@@ -56,6 +56,7 @@ export const SignInButton = styled.button`
     font-weight: 600;
     font-size: 1rem;
     border-radius: 4px;
+    cursor: pointer;
 `;
 
 export const Paragraph = styled.p`

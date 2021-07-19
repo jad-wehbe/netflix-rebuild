@@ -1,7 +1,7 @@
 import { configureStore } from "@reduxjs/toolkit";
-import landingReducer from "Components/Landing/landingSlice";
-import signInSlice from "Components/SignIn/signInSlice";
-import signUpSlice from "Components/SignUp/signUpSlice";
+import landingReducer from "Pages/Landing/landingSlice";
+import signInSlice from "Pages/SignIn/signInSlice";
+import signUpSlice from "Pages/SignUp/signUpSlice";
 
 export const store = configureStore({
     reducer: {

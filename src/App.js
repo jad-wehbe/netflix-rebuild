@@ -1,8 +1,8 @@
 import { BrowserRouter as Router, Switch, Route } from "react-router-dom";
-import Landing from "Components/Landing/Landing";
-import SignIn from "Components/SignIn/SignIn";
-import Browse from "Components/Browse/Browse";
-import SignUp from "Components/SignUp/SignUp";
+import Landing from "Pages/Landing/Landing";
+import SignIn from "Pages/SignIn/SignIn";
+import Browse from "Pages/Browse/Browse";
+import SignUp from "Pages/SignUp/SignUp";
 
 import "./App.css";
 

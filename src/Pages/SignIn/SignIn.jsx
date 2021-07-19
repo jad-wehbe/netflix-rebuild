@@ -3,12 +3,9 @@ import { useState } from "react";
 import { Link } from "react-router-dom";
 import { useDispatch } from "react-redux";
 
-import { checkEmail, checkPassword } from "Components/SignIn/signInSlice";
+import { checkEmail, checkPassword } from "Pages/SignIn/signInSlice";
 
-import {
-    BackgroundGradient,
-    Background,
-} from "Components/Landing/Landing.Styles";
+import { BackgroundGradient, Background } from "Pages/Landing/Landing.Styles";
 
 import {
     Header,
@@ -18,6 +15,7 @@ import {
     Input,
     Container,
     SignInButton,
+    ForgetPassword,
     Paragraph,
     Span,
 } from "./SignIn.styles";
@@ -71,6 +69,9 @@ function SignIn() {
                         />
 
                         <SignInButton type="submit">SignIn</SignInButton>
+                        <ForgetPassword>
+                            <Link to="#">Forget Password?</Link>
+                        </ForgetPassword>
                         <Paragraph>
                             New to Netflix?
                             <Span>

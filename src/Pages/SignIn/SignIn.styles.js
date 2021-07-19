@@ -56,6 +56,17 @@ export const SignInButton = styled.button`
     font-weight: 600;
     font-size: 1rem;
     border-radius: 4px;
+    cursor: pointer;
+`;
+
+export const ForgetPassword = styled.p`
+    font-size: 1rem;
+    text-align: right;
+    color: #737373;
+
+    &:hover {
+        text-decoration: underline;
+    }
 `;
 
 export const Paragraph = styled.p`

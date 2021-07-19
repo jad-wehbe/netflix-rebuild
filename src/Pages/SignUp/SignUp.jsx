@@ -3,12 +3,9 @@ import { useState, useEffect } from "react";
 import { Link } from "react-router-dom";
 import { useDispatch, useSelector } from "react-redux";
 
-import { addEmail, addPassword } from "Components/SignUp/signUpSlice";
+import { addEmail, addPassword } from "Pages/SignUp/signUpSlice";
 
-import {
-    BackgroundGradient,
-    Background,
-} from "Components/Landing/Landing.Styles";
+import { BackgroundGradient, Background } from "Pages/Landing/Landing.Styles";
 
 import {
     Header,
