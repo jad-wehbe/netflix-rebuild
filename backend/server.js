@@ -1,14 +1,19 @@
 require("dotenv").config({ path: "./config.env" });
 const express = require("express");
+const connectDB = require("./config/db");
+
+// Connect DB
+connectDB();
 
 const app = express();
 
-// const cors = require("cors");
+// Parses incoming requests (req.body) with JSON
+app.use(express.json());
 
-const port = process.env.PORT || 5000;
+app.use("/api/auth", require("./routes/api/auth"));
 
-// app.use(cors());
+const PORT = process.env.PORT || 5000;
 
-app.listen(port, () => {
-    console.log(`Server listening at http://localhost:${port}`);
+app.listen(PORT, () => {
+    console.log(`Server listening at http://localhost:${PORT}`);
 });

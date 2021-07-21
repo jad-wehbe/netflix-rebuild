@@ -3,7 +3,7 @@ import { useState, useEffect } from "react";
 import { Link } from "react-router-dom";
 import { useDispatch, useSelector } from "react-redux";
 
-import { addEmail, addPassword } from "Pages/SignUp/signUpSlice";
+import { addName, addEmail, addPassword } from "Pages/SignUp/signUpSlice";
 
 import { BackgroundGradient, Background } from "Pages/Landing/Landing.Styles";
 
@@ -24,14 +24,16 @@ import logoSvg from "assets/Logo.svg";
 function SignUp() {
     const [email, setEmail] = useState("");
     const [password, setPassword] = useState("");
+    const [name, setName] = useState("");
 
     const dispatch = useDispatch();
 
     const handleSubmit = (event) => {
         event.preventDefault();
 
-        const payload = { email, password };
+        const payload = { name, email, password };
 
+        dispatch(addName(payload));
         dispatch(addEmail(payload));
         dispatch(addPassword(payload));
 
@@ -59,13 +61,23 @@ function SignUp() {
                         <H2>Sign Up</H2>
                         <Input
                             required
+                            minLength={3}
+                            type="text"
+                            placeholder="First Name"
+                            onChange={(event) => setName(event.target.value)}
+                            value={name}
+                        />
+                        <Input
+                            required
+                            minLength={6}
                             type="email"
-                            placeholder="Email or phone number"
+                            placeholder="Email"
                             onChange={(event) => setEmail(event.target.value)}
                             value={email}
                         />
                         <Input
                             required
+                            min={6}
                             type="password"
                             placeholder="Password"
                             onChange={(event) =>
