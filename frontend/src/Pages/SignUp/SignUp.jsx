@@ -22,9 +22,9 @@ import {
 import logoSvg from "assets/Logo.svg";
 
 function SignUp() {
+    const [name, setName] = useState("");
     const [email, setEmail] = useState("");
     const [password, setPassword] = useState("");
-    const [name, setName] = useState("");
 
     const dispatch = useDispatch();
 
@@ -41,6 +41,7 @@ function SignUp() {
         setPassword("");
     };
 
+    // Check if we have an email entered in Landing page
     const emailState = useSelector((state) => state.email.email);
 
     useEffect(() => {

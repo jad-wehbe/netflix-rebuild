@@ -11,18 +11,10 @@ function App() {
         <div className="App">
             <Router>
                 <Switch>
-                    <Route path="/SignIn">
-                        <SignIn />
-                    </Route>
-                    <Route path="/SignUp">
-                        <SignUp />
-                    </Route>
-                    <Route path="/Browse">
-                        <Browse />
-                    </Route>
-                    <Route path="/">
-                        <Landing />
-                    </Route>
+                    <Route path="/" exact component={Landing} />
+                    <Route path="/SignIn" component={SignIn} />
+                    <Route path="/SignUp" component={SignUp} />
+                    <Route path="/Browse" component={Browse} />
                 </Switch>
             </Router>
         </div>
