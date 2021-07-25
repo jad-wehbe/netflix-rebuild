@@ -4,7 +4,7 @@ const jwt = require("jsonwebtoken");
 const User = require("../models/User");
 const { registerValidation, loginValidation } = require("../utils/validate");
 
-exports.register = async (req, res, next) => {
+exports.register = async (req, res) => {
     // Validation
     const { error } = registerValidation(req.body);
     if (error) return res.status(400).send(error.details[0].message);
@@ -31,7 +31,31 @@ exports.register = async (req, res, next) => {
     }
 };
 
-exports.login = async (req, res, next) => {
+// FOR TESTING PURPOSE ONLY!!!
+let refreshTokens = [];
+
+exports.refreshToken = (req, res) => {
+    const refreshToken = req.body.token;
+
+    if (refreshToken == null) return res.sendStatus(401);
+    if (!refreshTokens.includes(refreshToken)) return res.sendStatus(403);
+
+    jwt.verify(
+        refreshToken,
+        process.env.REFRESH_TOKEN_SECRET,
+        { expiresIn: "30s" },
+        (err, user) => {
+            if (err) return res.sendStatus(403);
+            const accessToken = jwt.sign(
+                { _id: user._id },
+                process.env.ACCESS_TOKEN_SECRET
+            );
+            res.json({ accessToken: accessToken });
+        }
+    );
+};
+
+exports.login = async (req, res) => {
     // Validation
     const { error } = loginValidation(req.body);
     if (error) return res.status(400).send(error.details[0].message);
@@ -45,13 +69,40 @@ exports.login = async (req, res, next) => {
     if (!validPass) return res.status(400).send("Invalid password");
 
     //Create and assign a token
-    const token = jwt.sign({ _id: user._id }, process.env.TOKEN_SECRET);
-    res.header("auth-token", token).send(token);
+    const accessToken = jwt.sign(
+        { _id: user._id },
+        process.env.ACCESS_TOKEN_SECRET,
+        { expiresIn: "30s" }
+    );
+
+    // Create refreshToken
+    const refreshToken = jwt.sign(
+        { _id: user._id },
+        process.env.REFRESH_TOKEN_SECRET
+    );
+    refreshTokens.push(refreshToken);
+
+    // res.json({ accessToken });
+    res.json({ accessToken, refreshToken });
 };
 
-exports.forgetPassword = (req, res, next) => {
+exports.logout = (req, res) => {
+    refreshTokens = refreshTokens.filter((token) => token !== req.body.token);
+    res.sendStatus(204);
+};
+
+exports.forgetPassword = (req, res) => {
     res.send("Forget password Route");
 };
-exports.resetPassword = (req, res, next) => {
+exports.resetPassword = (req, res) => {
     res.send("Reset Password Route");
+};
+
+// Test route
+exports.private = (req, res) => {
+    // res.send(req.user);
+    if (req.user) {
+        user = req.user;
+        res.json({ Name: user.name, Email: user.email, refreshTokens });
+    }
 };

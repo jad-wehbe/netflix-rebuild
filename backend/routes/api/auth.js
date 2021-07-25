@@ -1,20 +1,31 @@
 const express = require("express");
 const router = express.Router();
+const verifyToken = require("../../middlewares/verifyToken");
 
 const {
     register,
     login,
     forgetPassword,
     resetPassword,
+    private,
+    refreshToken,
+    logout,
 } = require("../../controllers/auth");
 
-// Same as router.post("/register", () => {})
-router.route("/register").post(register);
+// Routes
+router.post("/register", register);
 
-router.route("/login").post(login);
+router.post("/login", login);
 
-router.route("/forgetPassword").post(forgetPassword);
+router.post("/forgetPassword", forgetPassword);
 
-router.route("/resetPassword/:resetToken").put(resetPassword);
+router.put("/resetPassword/:resetToken", resetPassword);
+
+// Test Route
+router.get("/private", verifyToken, private);
+
+// JWT Refresh Token Route
+router.post("/token", refreshToken);
+router.delete("/logout", logout);
 
 module.exports = router;
