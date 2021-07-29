@@ -25,6 +25,7 @@ function SignUp() {
     const [name, setName] = useState("");
     const [email, setEmail] = useState("");
     const [password, setPassword] = useState("");
+    const [verify, setVerify] = useState("");
 
     const dispatch = useDispatch();
 
@@ -85,6 +86,15 @@ function SignUp() {
                                 setPassword(event.target.value)
                             }
                             value={password}
+                        />
+
+                        <Input
+                            required
+                            min={6}
+                            type="password"
+                            placeholder="Verify Password"
+                            onChange={(event) => setVerify(event.target.value)}
+                            value={verify}
                         />
 
                         <SignInButton type="submit">Sign Up</SignInButton>
