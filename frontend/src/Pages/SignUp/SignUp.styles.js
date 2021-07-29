@@ -60,7 +60,7 @@ export const SignInButton = styled.button`
 `;
 
 export const Paragraph = styled.p`
-    margin-top: 6rem;
+    margin-top: 2rem;
     color: #737373;
 `;
 
