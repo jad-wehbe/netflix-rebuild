@@ -3,22 +3,7 @@ import { Link, Redirect } from "react-router-dom";
 import { useDispatch } from "react-redux";
 import { addEmail } from "./landingSlice";
 
-import {
-    Background,
-    Header,
-    Logo,
-    SignInButton,
-    Title,
-    SubTitle,
-    Main,
-    Paragraph,
-    Span,
-    SignUp,
-    Input,
-    SignUpButton,
-    Terms,
-    Guest,
-} from "./Landing.Styles";
+import * as Styles from "./Landing.Styles";
 
 import logoSvg from "assets/Logo.svg";
 
@@ -41,22 +26,26 @@ function Landing() {
     }
 
     return (
-        <Background>
-            <Header>
-                <Logo src={logoSvg} alt="Logo" />
+        <Styles.Background>
+            <Styles.Header>
+                <Styles.Logo src={logoSvg} alt="Logo" />
                 <Link to="/SignIn">
-                    <SignInButton>Sign In</SignInButton>
+                    <Styles.SignInButton>Sign In</Styles.SignInButton>
                 </Link>
-            </Header>
-            <Main>
-                <Title>Unlimited movies, TV shows, and more.</Title>
-                <SubTitle>Watch anywhere. Cancel anytime</SubTitle>
-                <Paragraph>
-                    <Span>Ready to watch?</Span> Enter your Email:
-                </Paragraph>
+            </Styles.Header>
+            <Styles.Main>
+                <Styles.Title>
+                    Unlimited movies, TV shows, and more.
+                </Styles.Title>
+                <Styles.SubTitle>
+                    Watch anywhere. Cancel anytime
+                </Styles.SubTitle>
+                <Styles.Paragraph>
+                    <Styles.Span>Ready to watch?</Styles.Span> Enter your Email:
+                </Styles.Paragraph>
                 {/* TODO: Put a label and animations */}
-                <SignUp onSubmit={handleSubmit}>
-                    <Input
+                <Styles.SignUp onSubmit={handleSubmit}>
+                    <Styles.Input
                         required
                         type="email"
                         placeholder="Email Address"
@@ -65,16 +54,18 @@ function Landing() {
                         }}
                         value={email}
                     />
-                    <SignUpButton type="submit">Get Started &gt;</SignUpButton>
-                </SignUp>
-                <Terms>
+                    <Styles.SignUpButton type="submit">
+                        Get Started &gt;
+                    </Styles.SignUpButton>
+                </Styles.SignUp>
+                <Styles.Terms>
                     Entering your email will create or restart your membership
-                </Terms>
-                <Guest as="a" href="#">
+                </Styles.Terms>
+                <Styles.Guest as="a" href="#">
                     Continue as a Guest
-                </Guest>
-            </Main>
-        </Background>
+                </Styles.Guest>
+            </Styles.Main>
+        </Styles.Background>
     );
 }
 
