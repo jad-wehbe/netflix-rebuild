@@ -3,12 +3,13 @@ import BackgroundImage from "assets/Background.jpg";
 
 // Custom colours
 const red = "#E50914";
-const lightRed = "#F24423";
+const lightRed = "#ff5231";
 const grey = "#8c8c8c";
 
 // Background
 export const Background = styled.div`
     height: 100vh;
+    min-height: 600px;
     background: linear-gradient(
             180deg,
             rgba(0, 0, 0, 0.8) 0%,
@@ -46,6 +47,10 @@ export const SignInButton = styled.button`
     font-size: 1rem;
     border-radius: 4px;
     cursor: pointer;
+
+    &:hover {
+        background-color: ${lightRed};
+    }
 `;
 
 // Main
@@ -107,7 +112,6 @@ export const SignUp = styled.form`
 export const Input = styled.input`
     flex: 1;
     outline: none;
-    /* height: 60px; */
     padding: 1.2rem;
     font-size: 1rem;
 
@@ -127,6 +131,7 @@ export const SignUpButton = styled.button`
     font-size: 1.2rem;
     font-weight: 400;
     cursor: pointer;
+    border-radius: 4px;
 
     &:hover {
         background-color: ${lightRed};
@@ -141,12 +146,12 @@ export const SignUpButton = styled.button`
 
 export const Terms = styled.p`
     margin: 2rem 0;
-    color: ${grey};
+    color: #fff;
     font-size: 1rem;
 `;
 
 export const Guest = styled.a`
-    color: #d4d4d4;
+    color: ${grey};
     font-size: 1rem;
     text-decoration: none;
     width: fit-content;

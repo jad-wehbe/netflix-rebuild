@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import { useState } from "react";
 import { Link, Redirect } from "react-router-dom";
 import { useDispatch } from "react-redux";
 import { addEmail } from "./landingSlice";
@@ -11,12 +11,12 @@ function Landing() {
     const [email, setEmail] = useState("");
     const [redirect, setRedirect] = useState(false);
 
-    // const emailState = useSelector((state) => state.email.value);
     const dispatch = useDispatch();
 
     const handleSubmit = (event) => {
         event.preventDefault();
         dispatch(addEmail(email));
+
         setEmail("");
         setRedirect(true);
     };
@@ -43,7 +43,6 @@ function Landing() {
                 <Styles.Paragraph>
                     <Styles.Span>Ready to watch?</Styles.Span> Enter your Email:
                 </Styles.Paragraph>
-                {/* TODO: Put a label and animations */}
                 <Styles.SignUp onSubmit={handleSubmit}>
                     <Styles.Input
                         required
