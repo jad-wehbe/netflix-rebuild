@@ -5,9 +5,10 @@ import { useDispatch } from "react-redux";
 
 import { checkEmail, checkPassword } from "Pages/SignIn/signInSlice";
 
-import { BackgroundGradient, Background } from "Pages/Landing/Landing.Styles";
+import { Background } from "Pages/Landing/Landing.Styles";
 
 import {
+    BackgroundGradient,
     Header,
     Logo,
     Form,

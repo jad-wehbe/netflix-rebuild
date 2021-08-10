@@ -3,27 +3,19 @@ import BackgroundImage from "assets/Background.jpg";
 
 // Custom colours
 const red = "#E50914";
-const darkRed = "#F24423";
+const lightRed = "#F24423";
 const grey = "#8c8c8c";
 
 // Background
 export const Background = styled.div`
     height: 100vh;
-    background-size: cover;
-    background-image: url(${BackgroundImage});
-    background-repeat: no-repeat;
-    background-position: center center;
-`;
-
-export const BackgroundGradient = styled.div`
-    height: 100%;
     background: linear-gradient(
             180deg,
             rgba(0, 0, 0, 0.8) 0%,
-            rgba(0, 0, 0, 0.1) 60%,
+            rgba(0, 0, 0, 0.4) 60%,
             rgba(0, 0, 0, 0.8) 100%
         ),
-        rgba(0, 0, 0, 0.4);
+        url(${BackgroundImage}) no-repeat center center;
 `;
 
 // Header
@@ -37,6 +29,11 @@ export const Header = styled.div`
 export const Logo = styled.img`
     width: 116px;
     height: 34px;
+
+    @media (max-width: 700px) {
+        width: 100px;
+        height: 30px;
+    }
 `;
 
 export const SignInButton = styled.button`
@@ -55,6 +52,7 @@ export const SignInButton = styled.button`
 export const Main = styled.div`
     height: 90%;
     width: 90%;
+    min-height: 500px;
     max-width: 50rem;
     margin: 0 auto;
     color: white;
@@ -64,7 +62,6 @@ export const Main = styled.div`
 `;
 
 export const Title = styled.h1`
-    /* font-size: 6vw; */
     font-size: 4rem;
     font-weight: 600;
     line-height: 1.2;
@@ -127,11 +124,12 @@ export const SignUpButton = styled.button`
     align-items: center;
     justify-content: center;
     padding: 1rem;
-    font-size: 1.5rem;
+    font-size: 1.2rem;
+    font-weight: 400;
     cursor: pointer;
 
     &:hover {
-        background-color: ${darkRed};
+        background-color: ${lightRed};
     }
 
     @media (max-width: 700px) {

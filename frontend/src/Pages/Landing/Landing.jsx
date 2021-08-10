@@ -5,7 +5,6 @@ import { addEmail } from "./landingSlice";
 
 import {
     Background,
-    BackgroundGradient,
     Header,
     Logo,
     SignInButton,
@@ -43,43 +42,38 @@ function Landing() {
 
     return (
         <Background>
-            <BackgroundGradient>
-                <Header>
-                    <Logo src={logoSvg} alt="Logo" />
-                    <Link to="/SignIn">
-                        <SignInButton>Sign In</SignInButton>
-                    </Link>
-                </Header>
-                <Main>
-                    <Title>Unlimited movies, TV shows, and more.</Title>
-                    <SubTitle>Watch anywhere. Cancel anytime</SubTitle>
-                    <Paragraph>
-                        <Span>Ready to watch?</Span> Enter your Email:
-                    </Paragraph>
-                    {/* TODO: Put a label and animations */}
-                    <SignUp onSubmit={handleSubmit}>
-                        <Input
-                            required
-                            type="email"
-                            placeholder="Email Address"
-                            onChange={(event) => {
-                                setEmail(event.target.value);
-                            }}
-                            value={email}
-                        />
-                        <SignUpButton type="submit">
-                            Get Started &gt;
-                        </SignUpButton>
-                    </SignUp>
-                    <Terms>
-                        Entering your email will create or restart your
-                        membership
-                    </Terms>
-                    <Guest as="a" href="#">
-                        Continue as a Guest
-                    </Guest>
-                </Main>
-            </BackgroundGradient>
+            <Header>
+                <Logo src={logoSvg} alt="Logo" />
+                <Link to="/SignIn">
+                    <SignInButton>Sign In</SignInButton>
+                </Link>
+            </Header>
+            <Main>
+                <Title>Unlimited movies, TV shows, and more.</Title>
+                <SubTitle>Watch anywhere. Cancel anytime</SubTitle>
+                <Paragraph>
+                    <Span>Ready to watch?</Span> Enter your Email:
+                </Paragraph>
+                {/* TODO: Put a label and animations */}
+                <SignUp onSubmit={handleSubmit}>
+                    <Input
+                        required
+                        type="email"
+                        placeholder="Email Address"
+                        onChange={(event) => {
+                            setEmail(event.target.value);
+                        }}
+                        value={email}
+                    />
+                    <SignUpButton type="submit">Get Started &gt;</SignUpButton>
+                </SignUp>
+                <Terms>
+                    Entering your email will create or restart your membership
+                </Terms>
+                <Guest as="a" href="#">
+                    Continue as a Guest
+                </Guest>
+            </Main>
         </Background>
     );
 }

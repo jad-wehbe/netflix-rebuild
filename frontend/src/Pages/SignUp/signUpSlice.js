@@ -9,7 +9,7 @@ export const signUpSlice = createSlice({
     },
     reducers: {
         addName: (state, action) => {
-            state.newName = action.payload.name;
+            state.newName = action.payload.username;
         },
 
         addEmail: (state, action) => {

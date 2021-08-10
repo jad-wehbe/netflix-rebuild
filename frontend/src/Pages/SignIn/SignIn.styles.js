@@ -2,6 +2,17 @@ import styled from "styled-components";
 
 const red = "#E50914";
 
+export const BackgroundGradient = styled.div`
+    height: 100%;
+    background: linear-gradient(
+            180deg,
+            rgba(0, 0, 0, 0.8) 0%,
+            rgba(0, 0, 0, 0.1) 60%,
+            rgba(0, 0, 0, 0.8) 100%
+        ),
+        rgba(0, 0, 0, 0.4);
+`;
+
 export const Header = styled.div`
     inset: 0;
     padding-top: 30px;
@@ -70,7 +81,7 @@ export const ForgetPassword = styled.p`
 `;
 
 export const Paragraph = styled.p`
-    margin-top: 6rem;
+    margin-top: 4rem;
     color: #737373;
 `;
 

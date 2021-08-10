@@ -1,113 +1,179 @@
-import React from "react";
 import { useState, useEffect } from "react";
 import { Link } from "react-router-dom";
 import { useDispatch, useSelector } from "react-redux";
+import { signUpValidation } from "../../utils/validation";
+// import { useFormik } from "formik";
+// import * as Yup from "yup";
 
 import { addName, addEmail, addPassword } from "Pages/SignUp/signUpSlice";
 
-import { BackgroundGradient, Background } from "Pages/Landing/Landing.Styles";
-
-import {
-    Header,
-    Logo,
-    Form,
-    H2,
-    Input,
-    Container,
-    SignInButton,
-    Paragraph,
-    Span,
-} from "./SignUp.styles";
+import * as Styles from "./SignUp.styles";
 
 import logoSvg from "assets/Logo.svg";
 
 function SignUp() {
-    const [name, setName] = useState("");
-    const [email, setEmail] = useState("");
-    const [password, setPassword] = useState("");
-    const [verify, setVerify] = useState("");
-
     const dispatch = useDispatch();
+
+    const initialState = {
+        username: "",
+        email: "",
+        password: "",
+        verify: "",
+    };
+
+    const [{ username, email, password, verify }, setState] =
+        useState(initialState);
+
+    const clearState = () => {
+        setState({ ...initialState });
+    };
+
+    const handleChange = (event) => {
+        const { name, value } = event.target;
+        setState((prevState) => ({ ...prevState, [name]: value }));
+    };
+
+    const handleBlur = (event) => {
+        const { name, value } = event.target;
+        console.log({ [name]: value });
+
+        // console.log(signUpValidation({ [name]: value }));
+    };
 
     const handleSubmit = (event) => {
         event.preventDefault();
 
-        const payload = { name, email, password };
+        const payload = { username, email, password };
+        console.log(signUpValidation(payload));
 
-        dispatch(addName(payload));
-        dispatch(addEmail(payload));
-        dispatch(addPassword(payload));
+        // dispatch(addName(payload));
+        // dispatch(addEmail(payload));
+        // dispatch(addPassword(payload));
 
-        setEmail("");
-        setPassword("");
+        clearState();
     };
 
     // Check if we have an email entered in Landing page
     const emailState = useSelector((state) => state.email.email);
 
     useEffect(() => {
-        setEmail(emailState);
+        setState((prevState) => ({ ...prevState, email: emailState }));
     }, [emailState]);
+
+    // const formik = useFormik({
+    //     initialValues: {
+    //         name: "",
+    //         email: "",
+    //         password: "",
+    //         verifyPassword: "",
+    //     },
+    //     validationSchema: Yup.object({
+    //         name: Yup.string()
+    //             .min(3, "Name must be more than 3 characters")
+    //             .required("Required"),
+    //         email: Yup.string()
+    //             .email("Invalid email address")
+    //             .required("Required"),
+    //         password: Yup.string()
+    //             .min(8, "Password must Contain at least 8 Characters")
+    //             .required("Required"),
+    //         verifyPassword: Yup.string().oneOf(
+    //             [Yup.ref("password"), null],
+    //             "Passwords must match"
+    //         ),
+    //     }),
+    //     onSubmit: (values) => {
+    //         formik.resetForm();
+    //         alert(JSON.stringify(values, null, 2));
+    //     },
+    // });
 
     // console.log(email);
     return (
-        <Background>
-            <BackgroundGradient>
-                <Header>
+        <Styles.Background>
+            <Styles.BackgroundGradient>
+                <Styles.Header>
                     <Link to="/">
-                        <Logo src={logoSvg} />
+                        <Styles.Logo src={logoSvg} />
                     </Link>
-                </Header>
-                <Form onSubmit={handleSubmit}>
-                    <Container>
-                        <H2>Sign Up</H2>
-                        <Input
-                            required
-                            minLength={3}
+                </Styles.Header>
+                <Styles.Form onSubmit={handleSubmit}>
+                    <Styles.Container>
+                        <Styles.H2>Sign Up</Styles.H2>
+                        <Styles.Input
+                            id="username"
+                            name="username"
                             type="text"
                             placeholder="First Name"
-                            onChange={(event) => setName(event.target.value)}
-                            value={name}
+                            onChange={handleChange}
+                            onBlur={handleBlur}
+                            value={username}
                         />
-                        <Input
-                            required
-                            minLength={6}
+                        {/* {formik.touched.name && formik.errors.name ? (
+                            <Styles.Error>{formik.errors.name}</Styles.Error>
+                        ) : null} */}
+
+                        <Styles.Input
+                            id="email"
+                            name="email"
                             type="email"
                             placeholder="Email"
-                            onChange={(event) => setEmail(event.target.value)}
+                            onChange={handleChange}
+                            onBlur={handleBlur}
                             value={email}
                         />
-                        <Input
-                            required
-                            min={6}
+
+                        {/* {formik.touched.email && formik.errors.email ? (
+                            <Styles.Error>{formik.errors.email}</Styles.Error>
+                        ) : null} */}
+
+                        <Styles.Input
+                            id="password"
+                            name="password"
                             type="password"
                             placeholder="Password"
-                            onChange={(event) =>
-                                setPassword(event.target.value)
-                            }
+                            onChange={handleChange}
+                            onBlur={handleBlur}
                             value={password}
                         />
 
-                        <Input
-                            required
-                            min={6}
+                        {/* {formik.touched.password && formik.errors.password ? (
+                            <Styles.Error>
+                                {formik.errors.password}
+                            </Styles.Error>
+                        ) : null} */}
+
+                        <Styles.Input
+                            id="verify"
+                            name="verify"
                             type="password"
                             placeholder="Verify Password"
-                            onChange={(event) => setVerify(event.target.value)}
+                            onChange={handleChange}
+                            onBlur={handleBlur}
                             value={verify}
                         />
 
-                        <SignInButton type="submit">Sign Up</SignInButton>
-                        <Paragraph>
+                        {/* {formik.touched.verifyPassword &&
+                        formik.errors.verifyPassword ? (
+                            <Styles.Error>
+                                {formik.errors.verifyPassword}
+                            </Styles.Error>
+                        ) : null} */}
+
+                        <Styles.SignInButton type="submit">
+                            Sign Up
+                        </Styles.SignInButton>
+
+                        <Styles.Paragraph>
                             Already have an account?
-                            <Span>
+                            <Styles.Span>
                                 <Link to="/SignIn">Sign In Now</Link>
-                            </Span>
-                        </Paragraph>
-                    </Container>
-                </Form>
-            </BackgroundGradient>
-        </Background>
+                            </Styles.Span>
+                        </Styles.Paragraph>
+                    </Styles.Container>
+                </Styles.Form>
+            </Styles.BackgroundGradient>
+        </Styles.Background>
     );
 }
 
