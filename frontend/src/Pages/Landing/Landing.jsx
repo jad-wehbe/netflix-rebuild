@@ -1,25 +1,31 @@
 import { useState } from "react";
 import { Link, Redirect } from "react-router-dom";
 import { useDispatch } from "react-redux";
+import { useFormik } from "formik";
 import { addEmail } from "./landingSlice";
 
+import logoSvg from "assets/Logo.svg";
 import * as Styles from "./Landing.Styles";
 
-import logoSvg from "assets/Logo.svg";
+import { emailValidation } from "utils/validation";
 
 function Landing() {
-    const [email, setEmail] = useState("");
     const [redirect, setRedirect] = useState(false);
 
     const dispatch = useDispatch();
 
-    const handleSubmit = (event) => {
-        event.preventDefault();
-        dispatch(addEmail(email));
+    const formik = useFormik({
+        initialValues: {
+            email: "",
+        },
+        validationSchema: emailValidation,
 
-        setEmail("");
-        setRedirect(true);
-    };
+        onSubmit: (values) => {
+            console.log(JSON.stringify(values, null, 2));
+            dispatch(addEmail(values.email));
+            setRedirect(true);
+        },
+    });
 
     if (redirect) {
         return <Redirect to="/SignUp" />;
@@ -43,20 +49,27 @@ function Landing() {
                 <Styles.Paragraph>
                     <Styles.Span>Ready to watch?</Styles.Span> Enter your Email:
                 </Styles.Paragraph>
-                <Styles.SignUp onSubmit={handleSubmit}>
+
+                {formik.touched.email && formik.errors.email ? (
+                    <Styles.Error>{formik.errors.email}</Styles.Error>
+                ) : null}
+
+                <Styles.SignUp onSubmit={formik.handleSubmit}>
                     <Styles.Input
-                        required
+                        autoComplete="off"
+                        id="email"
+                        name="email"
                         type="email"
                         placeholder="Email Address"
-                        onChange={(event) => {
-                            setEmail(event.target.value);
-                        }}
-                        value={email}
+                        onChange={formik.handleChange}
+                        onBlur={formik.handleBlur}
+                        value={formik.values.email}
                     />
                     <Styles.SignUpButton type="submit">
                         Get Started &gt;
                     </Styles.SignUpButton>
                 </Styles.SignUp>
+
                 <Styles.Terms>
                     Entering your email will create or restart your membership
                 </Styles.Terms>

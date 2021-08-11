@@ -1,88 +1,87 @@
-import React from "react";
-import { useState } from "react";
 import { Link } from "react-router-dom";
 import { useDispatch } from "react-redux";
-
-import { checkEmail, checkPassword } from "Pages/SignIn/signInSlice";
-
-import { Background } from "Pages/Landing/Landing.Styles";
-
-import {
-    BackgroundGradient,
-    Header,
-    Logo,
-    Form,
-    H2,
-    Input,
-    Container,
-    SignInButton,
-    ForgetPassword,
-    Paragraph,
-    Span,
-} from "./SignIn.styles";
+import { useFormik } from "formik";
+import { signInEmail, signInPassword } from "./signInSlice";
 
 import logoSvg from "assets/Logo.svg";
+import * as Styles from "./SignIn.styles";
+
+import { signInValidation } from "utils/validation";
 
 function SignIn() {
-    const [email, setEmail] = useState("");
-    const [password, setPassword] = useState("");
-
     const dispatch = useDispatch();
 
-    const handleSubmit = (event) => {
-        event.preventDefault();
+    const formik = useFormik({
+        initialValues: {
+            email: "",
+            password: "",
+        },
+        validationSchema: signInValidation,
 
-        const payload = { email, password };
+        onSubmit: (values) => {
+            console.log(JSON.stringify(values, null, 2));
 
-        dispatch(checkEmail(payload));
-        dispatch(checkPassword(payload));
+            dispatch(signInEmail(values));
+            dispatch(signInPassword(values));
 
-        setEmail("");
-        setPassword("");
-    };
+            formik.resetForm();
+        },
+    });
 
     return (
-        <Background>
-            <BackgroundGradient>
-                <Header>
-                    <Link to="/">
-                        <Logo src={logoSvg} />
-                    </Link>
-                </Header>
-                <Form onSubmit={handleSubmit}>
-                    <Container>
-                        <H2>Sign In</H2>
-                        <Input
-                            required
-                            type="email"
-                            placeholder="Email or phone number"
-                            onChange={(event) => setEmail(event.target.value)}
-                            value={email}
-                        />
-                        <Input
-                            required
-                            type="password"
-                            placeholder="Password"
-                            onChange={(event) =>
-                                setPassword(event.target.value)
-                            }
-                            value={password}
-                        />
+        <Styles.Background>
+            <Styles.Header>
+                <Link to="/">
+                    <Styles.Logo src={logoSvg} />
+                </Link>
+            </Styles.Header>
+            <Styles.Form onSubmit={formik.handleSubmit}>
+                <Styles.Container>
+                    <Styles.H2>Sign In</Styles.H2>
 
-                        <SignInButton type="submit">SignIn</SignInButton>
-                        <ForgetPassword>
-                            <Link to="#">Forget Password?</Link>
-                        </ForgetPassword>
-                        <Paragraph>
-                            New to Netflix?
-                            <Span>
-                                <Link to="/SignUp">Sign Up Now</Link>
-                            </Span>
-                        </Paragraph>
-                    </Container>
-                </Form>
-            </BackgroundGradient>
-        </Background>
+                    {formik.touched.email && formik.errors.email ? (
+                        <Styles.Error>{formik.errors.email}</Styles.Error>
+                    ) : null}
+
+                    <Styles.Input
+                        id="email"
+                        name="email"
+                        type="email"
+                        placeholder="Email Address"
+                        onChange={formik.handleChange}
+                        onBlur={formik.handleBlur}
+                        value={formik.values.email}
+                    />
+
+                    {formik.touched.password && formik.errors.password ? (
+                        <Styles.Error>{formik.errors.password}</Styles.Error>
+                    ) : null}
+
+                    <Styles.Input
+                        id="password"
+                        name="password"
+                        type="password"
+                        placeholder="Password"
+                        onChange={formik.handleChange}
+                        onBlur={formik.handleBlur}
+                        value={formik.values.password}
+                    />
+
+                    <Styles.SignInButton type="submit">
+                        SignIn
+                    </Styles.SignInButton>
+                    <Styles.ForgetPassword>
+                        <Link to="#">Forget Password?</Link>
+                    </Styles.ForgetPassword>
+                    <Styles.Paragraph>
+                        New to Netflix?
+                        <Styles.Span>
+                            <Link to="/SignUp">Sign Up Now</Link>
+                        </Styles.Span>
+                    </Styles.Paragraph>
+                </Styles.Container>
+            </Styles.Form>
+        </Styles.Background>
     );
 }
 
