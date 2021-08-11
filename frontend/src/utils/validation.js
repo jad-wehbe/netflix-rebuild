@@ -13,12 +13,12 @@ export const signInValidation = Yup.object({
         .email("Invalid email address")
         .required("Required"),
     password: Yup.string()
-        .min(8, "Password must contain at least 8 Characters")
+        .min(8, "Password must contain at least 8 characters")
         .required("Required"),
 });
 
 export const signUpValidation = Yup.object({
-    name: Yup.string()
+    username: Yup.string()
         .min(3, "Name must be more than 3 characters")
         .lowercase()
         .required("Required"),
@@ -27,7 +27,7 @@ export const signUpValidation = Yup.object({
         .email("Invalid email address")
         .required("Required"),
     password: Yup.string()
-        .min(8, "Password must Contain at least 8 Characters")
+        .min(8, "Password must contain at least 8 characters")
         .required("Required"),
     verifyPassword: Yup.string().oneOf(
         [Yup.ref("password"), null],

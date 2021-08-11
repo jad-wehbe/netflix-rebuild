@@ -1,178 +1,121 @@
-import { useState, useEffect } from "react";
 import { Link } from "react-router-dom";
 import { useDispatch, useSelector } from "react-redux";
-import { signUpValidation } from "../../utils/validation";
-// import { useFormik } from "formik";
-// import * as Yup from "yup";
+import { useFormik } from "formik";
 
 import { addName, addEmail, addPassword } from "Pages/SignUp/signUpSlice";
 
+import logoSvg from "assets/Logo.svg";
 import * as Styles from "./SignUp.styles";
 
-import logoSvg from "assets/Logo.svg";
+import { signUpValidation } from "../../utils/validation";
 
 function SignUp() {
     const dispatch = useDispatch();
 
-    const initialState = {
-        username: "",
-        email: "",
-        password: "",
-        verify: "",
-    };
-
-    const [{ username, email, password, verify }, setState] =
-        useState(initialState);
-
-    const clearState = () => {
-        setState({ ...initialState });
-    };
-
-    const handleChange = (event) => {
-        const { name, value } = event.target;
-        setState((prevState) => ({ ...prevState, [name]: value }));
-    };
-
-    const handleBlur = (event) => {
-        const { name, value } = event.target;
-        console.log({ [name]: value });
-
-        // console.log(signUpValidation({ [name]: value }));
-    };
-
-    const handleSubmit = (event) => {
-        event.preventDefault();
-
-        const payload = { username, email, password };
-        console.log(signUpValidation(payload));
-
-        // dispatch(addName(payload));
-        // dispatch(addEmail(payload));
-        // dispatch(addPassword(payload));
-
-        clearState();
-    };
-
     // Check if we have an email entered in Landing page
     const emailState = useSelector((state) => state.email.email);
 
-    useEffect(() => {
-        setState((prevState) => ({ ...prevState, email: emailState }));
-    }, [emailState]);
+    const formik = useFormik({
+        initialValues: {
+            username: "",
+            email: emailState,
+            password: "",
+            verifyPassword: "",
+        },
+        validationSchema: signUpValidation,
 
-    // const formik = useFormik({
-    //     initialValues: {
-    //         name: "",
-    //         email: "",
-    //         password: "",
-    //         verifyPassword: "",
-    //     },
-    //     validationSchema: Yup.object({
-    //         name: Yup.string()
-    //             .min(3, "Name must be more than 3 characters")
-    //             .required("Required"),
-    //         email: Yup.string()
-    //             .email("Invalid email address")
-    //             .required("Required"),
-    //         password: Yup.string()
-    //             .min(8, "Password must Contain at least 8 Characters")
-    //             .required("Required"),
-    //         verifyPassword: Yup.string().oneOf(
-    //             [Yup.ref("password"), null],
-    //             "Passwords must match"
-    //         ),
-    //     }),
-    //     onSubmit: (values) => {
-    //         formik.resetForm();
-    //         alert(JSON.stringify(values, null, 2));
-    //     },
-    // });
+        onSubmit: (values) => {
+            console.log(JSON.stringify(values, null, 2));
 
-    // console.log(email);
+            dispatch(addName(values));
+            dispatch(addEmail(values));
+            dispatch(addPassword(values));
+
+            formik.resetForm();
+        },
+    });
     return (
         <Styles.Background>
-            <Styles.BackgroundGradient>
-                <Styles.Header>
-                    <Link to="/">
-                        <Styles.Logo src={logoSvg} />
-                    </Link>
-                </Styles.Header>
-                <Styles.Form onSubmit={handleSubmit}>
-                    <Styles.Container>
-                        <Styles.H2>Sign Up</Styles.H2>
-                        <Styles.Input
-                            id="username"
-                            name="username"
-                            type="text"
-                            placeholder="First Name"
-                            onChange={handleChange}
-                            onBlur={handleBlur}
-                            value={username}
-                        />
-                        {/* {formik.touched.name && formik.errors.name ? (
-                            <Styles.Error>{formik.errors.name}</Styles.Error>
-                        ) : null} */}
+            <Styles.Header>
+                <Link to="/">
+                    <Styles.Logo src={logoSvg} />
+                </Link>
+            </Styles.Header>
+            <Styles.Form onSubmit={formik.handleSubmit}>
+                <Styles.Container>
+                    <Styles.H2>Sign Up</Styles.H2>
 
-                        <Styles.Input
-                            id="email"
-                            name="email"
-                            type="email"
-                            placeholder="Email"
-                            onChange={handleChange}
-                            onBlur={handleBlur}
-                            value={email}
-                        />
+                    {formik.touched.username && formik.errors.username ? (
+                        <Styles.Error>{formik.errors.username}</Styles.Error>
+                    ) : null}
 
-                        {/* {formik.touched.email && formik.errors.email ? (
-                            <Styles.Error>{formik.errors.email}</Styles.Error>
-                        ) : null} */}
+                    <Styles.Input
+                        id="username"
+                        name="username"
+                        type="text"
+                        placeholder="First Name"
+                        onChange={formik.handleChange}
+                        onBlur={formik.handleBlur}
+                        value={formik.values.username}
+                    />
 
-                        <Styles.Input
-                            id="password"
-                            name="password"
-                            type="password"
-                            placeholder="Password"
-                            onChange={handleChange}
-                            onBlur={handleBlur}
-                            value={password}
-                        />
+                    {formik.touched.email && formik.errors.email ? (
+                        <Styles.Error>{formik.errors.email}</Styles.Error>
+                    ) : null}
 
-                        {/* {formik.touched.password && formik.errors.password ? (
-                            <Styles.Error>
-                                {formik.errors.password}
-                            </Styles.Error>
-                        ) : null} */}
+                    <Styles.Input
+                        id="email"
+                        name="email"
+                        type="email"
+                        placeholder="Email"
+                        onChange={formik.handleChange}
+                        onBlur={formik.handleBlur}
+                        value={formik.values.email}
+                    />
 
-                        <Styles.Input
-                            id="verify"
-                            name="verify"
-                            type="password"
-                            placeholder="Verify Password"
-                            onChange={handleChange}
-                            onBlur={handleBlur}
-                            value={verify}
-                        />
+                    {formik.touched.password && formik.errors.password ? (
+                        <Styles.Error>{formik.errors.password}</Styles.Error>
+                    ) : null}
 
-                        {/* {formik.touched.verifyPassword &&
-                        formik.errors.verifyPassword ? (
-                            <Styles.Error>
-                                {formik.errors.verifyPassword}
-                            </Styles.Error>
-                        ) : null} */}
+                    <Styles.Input
+                        id="password"
+                        name="password"
+                        type="password"
+                        placeholder="Password"
+                        onChange={formik.handleChange}
+                        onBlur={formik.handleBlur}
+                        value={formik.values.password}
+                    />
 
-                        <Styles.SignInButton type="submit">
-                            Sign Up
-                        </Styles.SignInButton>
+                    {formik.touched.verifyPassword &&
+                    formik.errors.verifyPassword ? (
+                        <Styles.Error>
+                            {formik.errors.verifyPassword}
+                        </Styles.Error>
+                    ) : null}
 
-                        <Styles.Paragraph>
-                            Already have an account?
-                            <Styles.Span>
-                                <Link to="/SignIn">Sign In Now</Link>
-                            </Styles.Span>
-                        </Styles.Paragraph>
-                    </Styles.Container>
-                </Styles.Form>
-            </Styles.BackgroundGradient>
+                    <Styles.Input
+                        id="verifyPassword"
+                        name="verifyPassword"
+                        type="password"
+                        placeholder="Verify Password"
+                        onChange={formik.handleChange}
+                        onBlur={formik.handleBlur}
+                        value={formik.values.verifyPassword}
+                    />
+
+                    <Styles.SignInButton type="submit">
+                        Sign Up
+                    </Styles.SignInButton>
+
+                    <Styles.Paragraph>
+                        Already have an account?
+                        <Styles.Span>
+                            <Link to="/SignIn">Sign In Now</Link>
+                        </Styles.Span>
+                    </Styles.Paragraph>
+                </Styles.Container>
+            </Styles.Form>
         </Styles.Background>
     );
 }

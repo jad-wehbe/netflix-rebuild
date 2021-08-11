@@ -61,6 +61,12 @@ export const Input = styled.input`
     background-color: #333333;
     border-radius: 4px;
     color: #a0a0a0;
+    &:-webkit-autofill {
+        border-radius: 0 !important;
+        box-shadow: 0 0 0 30px #1f1f1f inset !important;
+        -webkit-box-shadow: 0 0 0 30px #1f1f1f inset !important;
+        -webkit-text-fill-color: #666 !important;
+    }
 `;
 
 export const Error = styled.p`

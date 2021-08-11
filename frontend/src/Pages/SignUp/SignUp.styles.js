@@ -6,21 +6,14 @@ const grey = "#737373";
 
 export const Background = styled.div`
     height: 100vh;
-    background-size: cover;
-    background-image: url(${BackgroundImage});
-    background-repeat: no-repeat;
-    background-position: center center;
-`;
-
-export const BackgroundGradient = styled.div`
-    height: 100%;
+    min-height: 600px;
     background: linear-gradient(
             180deg,
             rgba(0, 0, 0, 0.8) 0%,
-            rgba(0, 0, 0, 0.1) 60%,
+            rgba(0, 0, 0, 0.4) 60%,
             rgba(0, 0, 0, 0.8) 100%
         ),
-        rgba(0, 0, 0, 0.4);
+        url(${BackgroundImage}) no-repeat center center;
 `;
 
 export const Header = styled.div`
@@ -59,28 +52,23 @@ export const Input = styled.input`
     border: none;
     width: calc(100% - 2rem);
     padding: 1rem;
-    margin-top: 1.5rem;
+    margin-bottom: 1.5rem;
     font-size: 1rem;
     background-color: #333333;
     border-radius: 4px;
     color: #a0a0a0;
-    &:-internal-autofill-selected {
-        display: block;
-        outline: none;
-        border: none;
-        width: calc(100% - 2rem);
-        padding: 1rem;
-        margin-top: 1.5rem;
-        font-size: 1rem;
-        background-color: #333333;
-        border-radius: 4px;
-        color: #a0a0a0;
+    &:-webkit-autofill {
+        border-radius: 0 !important;
+        box-shadow: 0 0 0 30px #1f1f1f inset !important;
+        -webkit-box-shadow: 0 0 0 30px #1f1f1f inset !important;
+        -webkit-text-fill-color: #666 !important;
     }
 `;
 
 export const Error = styled.p`
-    margin-top: 0.5rem;
-    color: #a0a0a0;
+    margin-bottom: 0.5rem;
+    /* color: #a0a0a0; */
+    color: ${red};
     /* position: absolute; */
 `;
 
@@ -89,7 +77,7 @@ export const SignInButton = styled.button`
     border: none;
     background-color: ${red};
     align-self: center;
-    margin: 2rem 0 1rem 0;
+    margin: 1rem 0;
     padding: 1rem 0;
     width: 100%;
     font-weight: 600;
