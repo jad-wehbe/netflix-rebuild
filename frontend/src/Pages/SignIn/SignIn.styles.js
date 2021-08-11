@@ -70,9 +70,7 @@ export const Input = styled.input`
 `;
 
 export const Error = styled.p`
-    font-size: 1.1rem;
-    font-weight: 600;
-    margin: 1rem 0;
+    margin-bottom: 0.5rem;
     color: ${red};
 `;
 

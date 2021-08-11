@@ -1,3 +1,4 @@
+import { useState, useEffect } from "react";
 import { Link } from "react-router-dom";
 import { useDispatch, useSelector } from "react-redux";
 import { useFormik } from "formik";
@@ -10,10 +11,17 @@ import * as Styles from "./SignUp.styles";
 import { signUpValidation } from "../../utils/validation";
 
 function SignUp() {
+    const [exist, setExist] = useState(false);
     const dispatch = useDispatch();
 
     // Check if we have an email entered in Landing page
     const emailState = useSelector((state) => state.email.email);
+
+    useEffect(() => {
+        if (emailState) {
+            setExist(true);
+        }
+    }, [emailState, exist]);
 
     const formik = useFormik({
         initialValues: {
@@ -64,6 +72,8 @@ function SignUp() {
                     ) : null}
 
                     <Styles.Input
+                        exist={exist}
+                        disabled={exist}
                         id="email"
                         name="email"
                         type="email"

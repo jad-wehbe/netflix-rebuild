@@ -25,6 +25,11 @@ export const Header = styled.div`
 export const Logo = styled.img`
     width: 116px;
     height: 34px;
+
+    @media (max-width: 700px) {
+        width: 100px;
+        height: 30px;
+    }
 `;
 
 export const Form = styled.form`
@@ -63,13 +68,20 @@ export const Input = styled.input`
         -webkit-box-shadow: 0 0 0 30px #1f1f1f inset !important;
         -webkit-text-fill-color: #666 !important;
     }
+
+    ${({ exist }) =>
+        exist &&
+        `
+        border-radius: 0 !important;
+        box-shadow: 0 0 0 30px #1f1f1f inset !important;
+        -webkit-box-shadow: 0 0 0 30px #1f1f1f inset !important;
+        -webkit-text-fill-color: #666 !important;
+    `}
 `;
 
 export const Error = styled.p`
     margin-bottom: 0.5rem;
-    /* color: #a0a0a0; */
     color: ${red};
-    /* position: absolute; */
 `;
 
 export const SignInButton = styled.button`

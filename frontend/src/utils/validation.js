@@ -29,8 +29,7 @@ export const signUpValidation = Yup.object({
     password: Yup.string()
         .min(8, "Password must contain at least 8 characters")
         .required("Required"),
-    verifyPassword: Yup.string().oneOf(
-        [Yup.ref("password"), null],
-        "Passwords must match"
-    ),
+    verifyPassword: Yup.string()
+        .required("Required")
+        .oneOf([Yup.ref("password"), null], "Passwords must match"),
 });
