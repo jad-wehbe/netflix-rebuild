@@ -4,7 +4,8 @@ import BackgroundImage from "assets/Background.jpg";
 // Custom colours
 const red = "#E50914";
 const lightRed = "#ff5231";
-const grey = "#8c8c8c";
+const grey = "#b5b5b5";
+const lightGrey = "#d3d3d3";
 
 // Background
 export const Background = styled.div`
@@ -131,7 +132,6 @@ export const SignUpButton = styled.button`
     font-size: 1.2rem;
     font-weight: 400;
     cursor: pointer;
-    border-radius: 4px;
 
     &:hover {
         background-color: ${lightRed};
@@ -141,16 +141,25 @@ export const SignUpButton = styled.button`
         font-size: 1rem;
         width: 60%;
         margin: 0 auto;
+        border-radius: 4px;
     }
 `;
 
+export const Error = styled.p`
+    font-size: 1.1rem;
+    font-weight: 600;
+    margin: 1rem 0;
+    color: ${red};
+`;
+
 export const Terms = styled.p`
-    margin: 2rem 0;
-    color: #fff;
+    margin: 3rem 0 1rem 0;
+    color: ${lightGrey};
     font-size: 1rem;
 `;
 
 export const Guest = styled.a`
+    margin-top: 1.5rem;
     color: ${grey};
     font-size: 1rem;
     text-decoration: none;
