@@ -1,16 +1,18 @@
 import styled from "styled-components";
+import BackgroundImage from "assets/Background.jpg";
 
 const red = "#E50914";
 
-export const BackgroundGradient = styled.div`
-    height: 100%;
+export const Background = styled.div`
+    height: 100vh;
+    min-height: 600px;
     background: linear-gradient(
             180deg,
             rgba(0, 0, 0, 0.8) 0%,
-            rgba(0, 0, 0, 0.1) 60%,
+            rgba(0, 0, 0, 0.4) 60%,
             rgba(0, 0, 0, 0.8) 100%
         ),
-        rgba(0, 0, 0, 0.4);
+        url(${BackgroundImage}) no-repeat center center;
 `;
 
 export const Header = styled.div`
@@ -22,6 +24,11 @@ export const Header = styled.div`
 export const Logo = styled.img`
     width: 116px;
     height: 34px;
+
+    @media (max-width: 700px) {
+        width: 100px;
+        height: 30px;
+    }
 `;
 
 export const Form = styled.form`
@@ -34,7 +41,7 @@ export const Form = styled.form`
 
 export const Container = styled.div`
     height: 100%;
-    padding: 4rem;
+    padding: 6rem 4rem 0 4rem;
 `;
 
 export const H2 = styled.h2`
@@ -56,6 +63,13 @@ export const Input = styled.input`
     color: #a0a0a0;
 `;
 
+export const Error = styled.p`
+    font-size: 1.1rem;
+    font-weight: 600;
+    margin: 1rem 0;
+    color: ${red};
+`;
+
 export const SignInButton = styled.button`
     color: white;
     border: none;
@@ -71,6 +85,7 @@ export const SignInButton = styled.button`
 `;
 
 export const ForgetPassword = styled.p`
+    margin-top: 0.5rem;
     font-size: 1rem;
     text-align: right;
     color: #737373;

@@ -1,27 +1,18 @@
 import { useState } from "react";
 import { Link, Redirect } from "react-router-dom";
 import { useDispatch } from "react-redux";
-import { addEmail } from "./landingSlice";
 import { useFormik } from "formik";
+import { addEmail } from "./landingSlice";
 
 import logoSvg from "assets/Logo.svg";
 import * as Styles from "./Landing.Styles";
 
-import { emailValidation } from "../../utils/validation";
+import { emailValidation } from "utils/validation";
 
 function Landing() {
-    // const [email, setEmail] = useState("");
     const [redirect, setRedirect] = useState(false);
 
     const dispatch = useDispatch();
-
-    // const handleSubmit = (event) => {
-    //     event.preventDefault();
-    //     dispatch(addEmail(email));
-
-    //     setEmail("");
-    //     setRedirect(true);
-    // };
 
     const formik = useFormik({
         initialValues: {

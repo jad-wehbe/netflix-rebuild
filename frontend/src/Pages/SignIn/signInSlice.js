@@ -7,16 +7,16 @@ export const signInSlice = createSlice({
         password: "",
     },
     reducers: {
-        checkEmail: (state, action) => {
+        signInEmail: (state, action) => {
             state.email = action.payload.email;
         },
 
-        checkPassword: (state, action) => {
+        signInPassword: (state, action) => {
             state.password = action.payload.password;
         },
     },
 });
 
-export const { checkEmail, checkPassword } = signInSlice.actions;
+export const { signInEmail, signInPassword } = signInSlice.actions;
 
 export default signInSlice.reducer;

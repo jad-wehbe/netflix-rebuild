@@ -7,6 +7,16 @@ export const emailValidation = Yup.object({
         .required("Required"),
 });
 
+export const signInValidation = Yup.object({
+    email: Yup.string()
+        .min(6, "Email must be at least 6 characters")
+        .email("Invalid email address")
+        .required("Required"),
+    password: Yup.string()
+        .min(8, "Password must contain at least 8 Characters")
+        .required("Required"),
+});
+
 export const signUpValidation = Yup.object({
     name: Yup.string()
         .min(3, "Name must be more than 3 characters")
