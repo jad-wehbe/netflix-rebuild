@@ -5,6 +5,7 @@ import logoSvg from "assets/Logo.svg";
 import * as Styles from "./SignIn.styles";
 
 import { signInValidation } from "utils/validation";
+import { handleLogin } from "utils/api";
 
 function SignIn() {
     const formik = useFormik({
@@ -17,6 +18,7 @@ function SignIn() {
         onSubmit: (values) => {
             console.log(JSON.stringify(values, null, 2));
 
+            handleLogin(values);
             formik.resetForm();
         },
     });

@@ -4,7 +4,7 @@ const api = axios.create({
     baseURL: "http://localhost:5000/",
 });
 
-// Handle register
+// Register
 export const handleRegister = (user) => {
     const newUser = {
         username: user.username,
@@ -22,4 +22,15 @@ export const handleRegister = (user) => {
         });
 };
 
-export default api;
+// Sign In
+export const handleLogin = (user) => {
+    api.post("http://localhost:5000/api/auth/login", user)
+        .then((res) => {
+            console.log(res);
+            localStorage.setItem("authToken", res.data.accessToken);
+        })
+        .catch((err) => {
+            console.warn(err.response.data);
+            alert(err.response.data);
+        });
+};

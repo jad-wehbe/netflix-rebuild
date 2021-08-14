@@ -31,7 +31,7 @@ exports.register = async (req, res) => {
     }
 };
 
-// FOR TESTING PURPOSE ONLY!!!
+//! FOR TESTING PURPOSE ONLY!!!
 let refreshTokens = [];
 
 exports.refreshToken = (req, res) => {
@@ -43,7 +43,7 @@ exports.refreshToken = (req, res) => {
     jwt.verify(
         refreshToken,
         process.env.REFRESH_TOKEN_SECRET,
-        { expiresIn: "30s" },
+        { expiresIn: "10m" },
         (err, user) => {
             if (err) return res.sendStatus(403);
             const accessToken = jwt.sign(
@@ -72,7 +72,7 @@ exports.login = async (req, res) => {
     const accessToken = jwt.sign(
         { _id: user._id },
         process.env.ACCESS_TOKEN_SECRET,
-        { expiresIn: "30s" }
+        { expiresIn: "10m" }
     );
 
     // Create refreshToken
@@ -82,7 +82,6 @@ exports.login = async (req, res) => {
     );
     refreshTokens.push(refreshToken);
 
-    // res.json({ accessToken });
     res.json({ accessToken, refreshToken });
 };
 
@@ -100,7 +99,6 @@ exports.resetPassword = (req, res) => {
 
 // Test route
 exports.private = (req, res) => {
-    // res.send(req.user);
     if (req.user) {
         user = req.user;
         res.json({ Username: user.username, Email: user.email, refreshTokens });
