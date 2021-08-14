@@ -19,7 +19,7 @@ exports.register = async (req, res) => {
 
     // Create a new user
     const user = new User({
-        name: req.body.name,
+        username: req.body.username,
         email: req.body.email,
         password: hashedPassword,
     });
@@ -103,6 +103,6 @@ exports.private = (req, res) => {
     // res.send(req.user);
     if (req.user) {
         user = req.user;
-        res.json({ Name: user.name, Email: user.email, refreshTokens });
+        res.json({ Username: user.username, Email: user.email, refreshTokens });
     }
 };

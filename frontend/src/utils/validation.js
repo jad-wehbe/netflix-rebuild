@@ -21,7 +21,8 @@ export const signUpValidation = Yup.object({
     username: Yup.string()
         .min(3, "Name must be more than 3 characters")
         .lowercase()
-        .required("Required"),
+        .required("Required")
+        .matches(/^[a-z ,.'-]+$/i, "Is not in correct format"),
     email: Yup.string()
         .min(6, "Email must be at least 6 characters")
         .email("Invalid email address")

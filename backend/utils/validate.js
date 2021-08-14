@@ -2,7 +2,7 @@ const Joi = require("joi");
 
 const registerValidation = (data) => {
     const schema = Joi.object({
-        name: Joi.string()
+        username: Joi.string()
             .min(3)
             .lowercase()
             .pattern(/^[a-z ,.'-]+$/i)

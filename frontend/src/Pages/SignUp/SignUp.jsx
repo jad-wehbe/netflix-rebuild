@@ -8,7 +8,8 @@ import { addName, addEmail, addPassword } from "Pages/SignUp/signUpSlice";
 import logoSvg from "assets/Logo.svg";
 import * as Styles from "./SignUp.styles";
 
-import { signUpValidation } from "../../utils/validation";
+import { signUpValidation } from "utils/validation";
+import { handleRegister } from "utils/api";
 
 function SignUp() {
     const [exist, setExist] = useState(false);
@@ -38,6 +39,8 @@ function SignUp() {
             dispatch(addName(values));
             dispatch(addEmail(values));
             dispatch(addPassword(values));
+
+            handleRegister(values);
 
             formik.resetForm();
         },
