@@ -1,9 +1,7 @@
 import { useState, useEffect } from "react";
 import { Link } from "react-router-dom";
-import { useDispatch, useSelector } from "react-redux";
+import { useSelector } from "react-redux";
 import { useFormik } from "formik";
-
-import { addName, addEmail, addPassword } from "Pages/SignUp/signUpSlice";
 
 import logoSvg from "assets/Logo.svg";
 import * as Styles from "./SignUp.styles";
@@ -13,7 +11,6 @@ import { handleRegister } from "utils/api";
 
 function SignUp() {
     const [exist, setExist] = useState(false);
-    const dispatch = useDispatch();
 
     // Check if we have an email entered in Landing page
     const emailState = useSelector((state) => state.email.email);
@@ -36,12 +33,7 @@ function SignUp() {
         onSubmit: (values) => {
             console.log(JSON.stringify(values, null, 2));
 
-            dispatch(addName(values));
-            dispatch(addEmail(values));
-            dispatch(addPassword(values));
-
             handleRegister(values);
-
             formik.resetForm();
         },
     });

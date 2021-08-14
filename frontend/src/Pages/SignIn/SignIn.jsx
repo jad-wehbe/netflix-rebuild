@@ -1,7 +1,5 @@
 import { Link } from "react-router-dom";
-import { useDispatch } from "react-redux";
 import { useFormik } from "formik";
-import { signInEmail, signInPassword } from "./signInSlice";
 
 import logoSvg from "assets/Logo.svg";
 import * as Styles from "./SignIn.styles";
@@ -9,8 +7,6 @@ import * as Styles from "./SignIn.styles";
 import { signInValidation } from "utils/validation";
 
 function SignIn() {
-    const dispatch = useDispatch();
-
     const formik = useFormik({
         initialValues: {
             email: "",
@@ -20,9 +16,6 @@ function SignIn() {
 
         onSubmit: (values) => {
             console.log(JSON.stringify(values, null, 2));
-
-            dispatch(signInEmail(values));
-            dispatch(signInPassword(values));
 
             formik.resetForm();
         },
