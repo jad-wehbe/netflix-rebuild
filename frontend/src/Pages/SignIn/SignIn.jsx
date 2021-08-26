@@ -5,7 +5,7 @@ import logoSvg from "assets/Logo.svg";
 import * as Styles from "./SignIn.styles";
 
 import { signInValidation } from "utils/validation";
-import { handleLogin } from "utils/api";
+import { handleLogin } from "api/handleLogin";
 
 function SignIn() {
     const formik = useFormik({

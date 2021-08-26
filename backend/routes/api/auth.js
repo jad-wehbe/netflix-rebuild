@@ -7,7 +7,7 @@ const {
     login,
     forgetPassword,
     resetPassword,
-    private,
+    verify,
     refreshToken,
     logout,
 } = require("../../controllers/auth");
@@ -21,8 +21,8 @@ router.post("/forgetPassword", forgetPassword);
 
 router.put("/resetPassword/:resetToken", resetPassword);
 
-// Test Route
-router.get("/private", verifyToken, private);
+// Verify Route
+router.get("/verify", verifyToken, verify);
 
 // JWT Refresh Token Route
 router.post("/token", refreshToken);

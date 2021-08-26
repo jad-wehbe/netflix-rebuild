@@ -7,7 +7,7 @@ import logoSvg from "assets/Logo.svg";
 import * as Styles from "./SignUp.styles";
 
 import { signUpValidation } from "utils/validation";
-import { handleRegister } from "utils/api";
+import { handleRegister } from "api/handleRegister";
 
 function SignUp() {
     const [exist, setExist] = useState(false);

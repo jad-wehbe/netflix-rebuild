@@ -97,10 +97,10 @@ exports.resetPassword = (req, res) => {
     res.send("Reset Password Route");
 };
 
-// Test route
-exports.private = (req, res) => {
+// Verify route
+exports.verify = (req, res) => {
     if (req.user) {
         user = req.user;
-        res.json({ Username: user.username, Email: user.email, refreshTokens });
+        res.json({ username: user.username, email: user.email, refreshTokens });
     }
 };

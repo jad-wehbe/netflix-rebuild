@@ -17,6 +17,7 @@ const auth = async (req, res, next) => {
         if (!log_user) return res.status(400).send("User not found");
 
         req.user = log_user;
+        // req.user.push({ isValidToken: verified ? true : false });
     } catch (err) {
         res.status(403).send("Invalid Token");
     }
