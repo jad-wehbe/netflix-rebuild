@@ -43,7 +43,7 @@ exports.refreshToken = (req, res) => {
     jwt.verify(
         refreshToken,
         process.env.REFRESH_TOKEN_SECRET,
-        { expiresIn: "10m" },
+        { expiresIn: process.env.JWT_EXPIRES_IN },
         (err, user) => {
             if (err) return res.sendStatus(403);
             const accessToken = jwt.sign(
@@ -72,7 +72,7 @@ exports.login = async (req, res) => {
     const accessToken = jwt.sign(
         { _id: user._id },
         process.env.ACCESS_TOKEN_SECRET,
-        { expiresIn: "10m" }
+        { expiresIn: process.env.JWT_EXPIRES_IN }
     );
 
     // Create refreshToken
@@ -80,9 +80,11 @@ exports.login = async (req, res) => {
         { _id: user._id },
         process.env.REFRESH_TOKEN_SECRET
     );
+
+    //! For testing only!!
     refreshTokens.push(refreshToken);
 
-    res.json({ accessToken, refreshToken });
+    res.json({ username: user.username, accessToken, refreshToken });
 };
 
 exports.logout = (req, res) => {
@@ -99,6 +101,7 @@ exports.resetPassword = (req, res) => {
 
 // Verify route
 exports.verify = (req, res) => {
+    // Using middleware
     if (req.user) {
         user = req.user;
         res.json({ username: user.username, email: user.email, refreshTokens });

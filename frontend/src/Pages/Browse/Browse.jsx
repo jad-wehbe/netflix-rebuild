@@ -1,9 +1,10 @@
 import React from "react";
+import { H1 } from "./Browse.styles";
 
 function Browse() {
     return (
         <div>
-            <h1>Browse Page</h1>
+            <H1>Browse Page</H1>
         </div>
     );
 }
