@@ -99,7 +99,7 @@ export const SignInButton = styled.button`
 `;
 
 export const Paragraph = styled.p`
-    margin: 2% 0;
+    margin: 5% 0;
     color: ${grey};
 `;
 
