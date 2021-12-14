@@ -1,6 +1,5 @@
 import { useState, useEffect } from "react";
 import { Link } from "react-router-dom";
-import { useSelector } from "react-redux";
 import { useFormik } from "formik";
 
 import logoSvg from "assets/Logo.svg";
@@ -8,12 +7,13 @@ import * as Styles from "./SignUp.styles";
 
 import { signUpValidation } from "utils/validation";
 import { handleRegister } from "api/handleRegister";
+import { useAppSelector } from "app/hooks";
 
 function SignUp() {
     const [exist, setExist] = useState(false);
 
     // Check if we have an email entered in Landing page
-    const emailState = useSelector((state) => state.email.email);
+    const emailState = useAppSelector((state) => state.email.email);
 
     useEffect(() => {
         if (emailState) {

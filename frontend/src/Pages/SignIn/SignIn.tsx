@@ -1,6 +1,5 @@
-import { useState } from "react";
-import { Link, Redirect } from "react-router-dom";
-import { useDispatch, useSelector } from "react-redux";
+// import { useState } from "react";
+import { Link } from "react-router-dom";
 import { useFormik } from "formik";
 
 import logoSvg from "assets/Logo.svg";
@@ -8,11 +7,12 @@ import * as Styles from "./SignIn.styles";
 
 import { signInValidation } from "utils/validation";
 import { handleLogin } from "api/handleLogin";
+import { useAppDispatch } from "app/hooks";
 
 function SignIn() {
-    const [redirect, setRedirect] = useState(false);
+    // const [redirect, setRedirect] = useState(false);
 
-    const dispatch = useDispatch();
+    const dispatch = useAppDispatch();
 
     const formik = useFormik({
         initialValues: {
@@ -25,14 +25,15 @@ function SignIn() {
             console.log(JSON.stringify(values, null, 2));
 
             handleLogin(values, dispatch);
-            setRedirect(true);
+
+            // setRedirect(true);
             formik.resetForm();
         },
     });
 
-    const isUser = useSelector((state) => state.signIn.isUser);
+    // const isUser = useAppSelector((state) => state.signIn.isUser);
 
-    if (isUser && redirect) return <Redirect to="/browse" />;
+    // if (isUser && redirect) return <Redirect to="/browse" />;
 
     return (
         <Styles.Background>

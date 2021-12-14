@@ -1,4 +1,3 @@
-import React from "react";
 import { H1 } from "./Browse.styles";
 
 function Browse() {

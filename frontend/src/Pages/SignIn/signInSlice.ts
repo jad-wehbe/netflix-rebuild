@@ -1,7 +1,15 @@
-import { createSlice } from "@reduxjs/toolkit";
+import { createSlice, PayloadAction } from "@reduxjs/toolkit";
 
-const initialState = {
-    user: JSON.parse(localStorage.getItem("user")) || null,
+interface signInState {
+    user: string | null;
+    isFetching: boolean;
+    isUser: boolean;
+    error: boolean;
+}
+
+const initialState: signInState = {
+    // user: JSON.parse(localStorage.getItem("user")) || null,
+    user: null,
     isFetching: false,
     isUser: false,
     error: false,
@@ -17,7 +25,7 @@ export const signInSlice = createSlice({
             state.error = false;
         },
 
-        loginSuccess: (state, action) => {
+        loginSuccess: (state, action: PayloadAction<string | null>) => {
             state.user = action.payload;
             state.isFetching = false;
             state.error = false;
