@@ -51,6 +51,10 @@ export const H2 = styled.h2`
     font-size: 2rem;
 `;
 
+interface IProps {
+    exist?: boolean;
+}
+
 export const Input = styled.input`
     display: block;
     outline: none;
@@ -69,8 +73,8 @@ export const Input = styled.input`
         -webkit-text-fill-color: #666 !important;
     }
 
-    ${({ exist }) =>
-        exist &&
+    ${(props: IProps) =>
+        props.exist &&
         `
         border-radius: 0 !important;
         box-shadow: 0 0 0 30px #1f1f1f inset !important;
