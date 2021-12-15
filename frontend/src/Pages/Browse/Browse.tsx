@@ -1,9 +1,17 @@
-import { H1 } from "./Browse.styles";
+// import * as Styles from "./Browse.styles"
+
+import Header from "./Components/Header";
 
 function Browse() {
     return (
         <div>
-            <H1>Browse Page</H1>
+            <Header />
+            {/* Hero Section */}
+            <div>
+                {/* Movie Properties */}
+                {/* Poster Image */}
+            </div>
+            {/* Lists */}
         </div>
     );
 }
