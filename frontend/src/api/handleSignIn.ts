@@ -1,4 +1,3 @@
-import { Dispatch } from "react";
 import { signInWithEmailAndPassword } from "firebase/auth";
 import {
     loginFailure,
@@ -6,30 +5,39 @@ import {
     loginSuccess,
 } from "Pages/SignIn/signInSlice";
 import { auth } from "utils/Firebase";
+import { Dispatch } from "react";
+import { History } from "history";
 
-interface User {
+interface Values {
     email: string;
     password: string;
 }
 
-export const handleLogin = async (user: User, dispatch: Dispatch<any>) => {
-    dispatch(loginStart());
-
+const handleSignIn = async (
+    values: Values,
+    dispatch: Dispatch<any>,
+    history: History
+) => {
+    dispatch(loginStart);
     try {
         const userCredential = await signInWithEmailAndPassword(
             auth,
-            user.email,
-            user.password
+            values.email,
+            values.password
         );
         // Signed in
         const currentUser = userCredential.user;
         console.log(currentUser);
         dispatch(loginSuccess(currentUser.displayName));
+        return history.push("/browse");
     } catch (error: any) {
         dispatch(loginFailure);
         const errorCode = error.code;
         const errorMessage = error.message;
+        alert(errorMessage);
         console.error("Error code: " + errorCode);
         console.error("Error message: " + errorMessage);
     }
 };
+
+export default handleSignIn;

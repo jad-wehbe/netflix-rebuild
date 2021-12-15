@@ -6,10 +6,14 @@ import logoSvg from "assets/Logo.svg";
 import * as Styles from "./SignUp.styles";
 
 import { signUpValidation } from "utils/validation";
-import { handleRegister } from "api/handleRegister";
 import { useAppSelector } from "app/hooks";
+import { handleSignUp } from "api/handleSignUp";
+import { useHistory } from "react-router-dom";
+import { useAppDispatch } from "app/hooks";
 
 function SignUp() {
+    const dispatch = useAppDispatch();
+    const history = useHistory();
     const [exist, setExist] = useState(false);
 
     // Check if we have an email entered in Landing page
@@ -32,11 +36,11 @@ function SignUp() {
 
         onSubmit: (values) => {
             console.log(JSON.stringify(values, null, 2));
-
-            handleRegister(values);
+            handleSignUp(values, dispatch, history);
             formik.resetForm();
         },
     });
+
     return (
         <Styles.Background>
             <Styles.Header>

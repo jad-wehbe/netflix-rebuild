@@ -9,7 +9,7 @@ import {
 
 import Landing from "Pages/Landing/Landing";
 import SignIn from "Pages/SignIn/SignIn";
-// import Browse from "Pages/Browse/Browse";
+import Browse from "Pages/Browse/Browse";
 import SignUp from "Pages/SignUp/SignUp";
 
 import "./App.css";
@@ -23,7 +23,7 @@ function App() {
                     <Route path="/" component={Landing} exact />
                     <Route path="/signIn" component={SignIn} exact />
                     <Route path="/signUp" component={SignUp} exact />
-                    {/* <PrivateRoute user={user} path="/browse" component={Browse} exact /> */}
+                    <Route path="/browse" component={Browse} exact />
                     <Redirect to="/" />
                 </Switch>
             </Router>

@@ -1,19 +1,18 @@
-// import { useState } from "react";
 import { Link } from "react-router-dom";
 import { useFormik } from "formik";
 
-import logoSvg from "assets/Logo.svg";
 import * as Styles from "./SignIn.styles";
+import logoSvg from "assets/Logo.svg";
 
 import { signInValidation } from "utils/validation";
-import { handleLogin } from "api/handleLogin";
+import handleSignIn from "api/handleSignIn";
+
 import { useAppDispatch } from "app/hooks";
+import { useHistory } from "react-router-dom";
 
 function SignIn() {
-    // const [redirect, setRedirect] = useState(false);
-
     const dispatch = useAppDispatch();
-
+    const history = useHistory();
     const formik = useFormik({
         initialValues: {
             email: "",
@@ -23,11 +22,9 @@ function SignIn() {
 
         onSubmit: (values) => {
             console.log(JSON.stringify(values, null, 2));
-
-            handleLogin(values, dispatch);
-
-            // setRedirect(true);
+            handleSignIn(values, dispatch, history);
             formik.resetForm();
+            // setRedirect(true);
         },
     });
 
