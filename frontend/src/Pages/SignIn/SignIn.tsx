@@ -24,13 +24,8 @@ function SignIn() {
             console.log(JSON.stringify(values, null, 2));
             handleSignIn(values, dispatch, history);
             formik.resetForm();
-            // setRedirect(true);
         },
     });
-
-    // const isUser = useAppSelector((state) => state.signIn.isUser);
-
-    // if (isUser && redirect) return <Redirect to="/browse" />;
 
     return (
         <Styles.Background>

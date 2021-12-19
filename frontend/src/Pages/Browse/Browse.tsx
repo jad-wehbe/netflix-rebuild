@@ -1,18 +1,15 @@
 // import * as Styles from "./Browse.styles"
 
-import Header from "./Components/Header";
+import Banner from "./Components/Banner/Banner";
+import Header from "./Components/Navbar/Navbar";
 
 function Browse() {
     return (
-        <div>
+        <>
             <Header />
-            {/* Hero Section */}
-            <div>
-                {/* Movie Properties */}
-                {/* Poster Image */}
-            </div>
+            <Banner />
             {/* Lists */}
-        </div>
+        </>
     );
 }
 

@@ -1,6 +1,6 @@
 import logoSvg from "assets/Logo.svg";
 import DownArrow from "assets/DownArrow.svg";
-import * as Styles from "./Header.styles";
+import * as Styles from "./Navbar.styles";
 import { useState, useEffect } from "react";
 import { auth } from "utils/Firebase";
 import { signOut } from "firebase/auth";
@@ -13,10 +13,8 @@ function Header() {
     useEffect(() => {
         function checkUser() {
             if (auth.currentUser !== null) {
-                console.log(auth);
                 setUsername(auth.currentUser.displayName);
             } else {
-                console.log(auth);
                 // history.push("/login")
             }
         }
@@ -37,14 +35,14 @@ function Header() {
 
     return (
         <>
-            <Styles.Header>
+            <Styles.Nav>
                 <Styles.Logo src={logoSvg} alt="Logo" />
                 <Styles.Search placeholder="I'm searching for..." />
                 <Styles.Profile onClick={handleClick}>
                     <Styles.Avatar />
                     <Styles.DownArrow src={DownArrow} />
                 </Styles.Profile>
-            </Styles.Header>
+            </Styles.Nav>
             <Styles.Dropdown isOpen={isOpen}>
                 <Styles.P>Hello {username}</Styles.P>
                 <Styles.P>Signed in with {auth.currentUser?.email}</Styles.P>

@@ -1,10 +1,10 @@
 
 import styled from "styled-components";
 
-// Header
-export const Header = styled.div`
+// Nav
+export const Nav = styled.nav`
     margin: 0 5%;
-    padding-top: 30px;
+    padding: 30px 0;
     display: flex;
     justify-content: space-between;
     align-items: center;
