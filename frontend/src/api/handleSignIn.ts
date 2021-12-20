@@ -27,7 +27,6 @@ const handleSignIn = async (
         );
         // Signed in
         const currentUser = userCredential.user;
-        console.log(currentUser);
         dispatch(loginSuccess(currentUser.displayName));
         return history.push("/browse");
     } catch (error: any) {

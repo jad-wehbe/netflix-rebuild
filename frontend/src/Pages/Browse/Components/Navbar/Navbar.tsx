@@ -3,22 +3,26 @@ import DownArrow from "assets/DownArrow.svg";
 import * as Styles from "./Navbar.styles";
 import { useState, useEffect } from "react";
 import { auth } from "utils/Firebase";
-import { signOut } from "firebase/auth";
 import { useHistory } from "react-router-dom";
+import { onAuthStateChanged, signOut } from "firebase/auth";
 
 function Header() {
     const [isOpen, setIsOpen] = useState(false);
-    const [username, setUsername] = useState<string|null>();
-    const history = useHistory()
+    const [username, setUsername] = useState<string | null>();
+
+    const history = useHistory();
+
     useEffect(() => {
-        function checkUser() {
-            if (auth.currentUser !== null) {
-                setUsername(auth.currentUser.displayName);
+        const unsubscribe = onAuthStateChanged(auth, (user) => {
+            console.log(user);
+            if (user) {
+                setUsername(user.displayName);
             } else {
-                // history.push("/login")
+                console.log("Nope");
+                history.push("/")
             }
-        }
-        checkUser();
+        });
+        unsubscribe();
     }, [history]);
 
     const handleClick = () => {
@@ -28,10 +32,8 @@ function Header() {
 
     const handleLogout = () => {
         console.log("Starting logout");
-        signOut(auth).then(() => {
-            history.push("/")
-        })
-    }
+        signOut(auth).then(() => history.push("/"));
+    };
 
     return (
         <>
