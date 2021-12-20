@@ -1,0 +1,14 @@
+{
+    "name": "netflix-clone",
+    "version": "1.0.0",
+    "main": "index.js",
+    "repository": "https://github.com/Jad2310/netflix-rebuild.git",
+    "author": "Jad <jadwehbe14@gmail.com>",
+    "license": "MIT",
+    "scripts": {
+        "both": "concurrently \"cd backend && yarn dev\" \"cd frontend && yarn start\" "
+    },
+    "devDependencies": {
+        "concurrently": "^6.2.1"
+    }
+}

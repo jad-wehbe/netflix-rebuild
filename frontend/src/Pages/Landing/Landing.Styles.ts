@@ -22,6 +22,7 @@ export const Background = styled.div`
 
 // Header
 export const Header = styled.div`
+
     padding-top: 30px;
     margin: 0 5%;
     display: flex;

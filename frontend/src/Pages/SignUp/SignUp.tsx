@@ -1,21 +1,23 @@
 import { useState, useEffect } from "react";
 import { Link } from "react-router-dom";
-import { useDispatch, useSelector } from "react-redux";
 import { useFormik } from "formik";
-
-import { addName, addEmail, addPassword } from "Pages/SignUp/signUpSlice";
 
 import logoSvg from "assets/Logo.svg";
 import * as Styles from "./SignUp.styles";
 
-import { signUpValidation } from "../../utils/validation";
+import { signUpValidation } from "utils/validation";
+import { useAppSelector } from "app/hooks";
+import { handleSignUp } from "api/handleSignUp";
+import { useHistory } from "react-router-dom";
+import { useAppDispatch } from "app/hooks";
 
 function SignUp() {
+    const dispatch = useAppDispatch();
+    const history = useHistory();
     const [exist, setExist] = useState(false);
-    const dispatch = useDispatch();
 
     // Check if we have an email entered in Landing page
-    const emailState = useSelector((state) => state.email.email);
+    const emailState = useAppSelector((state) => state.email.email);
 
     useEffect(() => {
         if (emailState) {
@@ -34,14 +36,11 @@ function SignUp() {
 
         onSubmit: (values) => {
             console.log(JSON.stringify(values, null, 2));
-
-            dispatch(addName(values));
-            dispatch(addEmail(values));
-            dispatch(addPassword(values));
-
+            handleSignUp(values, dispatch, history);
             formik.resetForm();
         },
     });
+
     return (
         <Styles.Background>
             <Styles.Header>
