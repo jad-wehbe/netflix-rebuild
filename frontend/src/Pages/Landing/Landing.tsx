@@ -21,7 +21,7 @@ function Landing() {
         validationSchema: emailValidation,
 
         onSubmit: (values) => {
-            console.log(JSON.stringify(values, null, 2));
+            // console.log(JSON.stringify(values, null, 2));
             dispatch(addEmail(values.email));
             setRedirect(true);
         },

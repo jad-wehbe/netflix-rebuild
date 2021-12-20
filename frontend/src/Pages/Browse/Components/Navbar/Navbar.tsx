@@ -1,37 +1,27 @@
 import logoSvg from "assets/Logo.svg";
 import DownArrow from "assets/DownArrow.svg";
 import * as Styles from "./Navbar.styles";
-import { useState, useEffect } from "react";
+import { useState } from "react";
 import { auth } from "utils/Firebase";
+import { signOut, User } from "firebase/auth";
 import { useHistory } from "react-router-dom";
-import { onAuthStateChanged, signOut } from "firebase/auth";
 
-function Header() {
+interface IProps {
+    user: User | undefined | null;
+}
+
+function Header(props:IProps) {
     const [isOpen, setIsOpen] = useState(false);
-    const [username, setUsername] = useState<string | null>();
+    const username = props.user?.displayName;
 
     const history = useHistory();
 
-    useEffect(() => {
-        const unsubscribe = onAuthStateChanged(auth, (user) => {
-            console.log(user);
-            if (user) {
-                setUsername(user.displayName);
-            } else {
-                console.log("Nope");
-                history.push("/")
-            }
-        });
-        unsubscribe();
-    }, [history]);
-
     const handleClick = () => {
         setIsOpen(!isOpen);
-        console.log(auth.currentUser);
+        // console.log(auth.currentUser);
     };
 
     const handleLogout = () => {
-        console.log("Starting logout");
         signOut(auth).then(() => history.push("/"));
     };
 
