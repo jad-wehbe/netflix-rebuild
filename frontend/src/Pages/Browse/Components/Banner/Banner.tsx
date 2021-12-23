@@ -26,7 +26,7 @@ function Banner() {
                     <Styles.Title>{show?.name || show?.original_title || show?.original_name || show?.title}</Styles.Title>
                     <Styles.List>
                         <Styles.ListItem>
-                            {show?.release_date ? show.release_date.split("-")[0] : "Release date not found"}
+                            {show?.release_date ? show.release_date.split("-")[0] : "date not found"}
                         </Styles.ListItem>
                         <Styles.ListItem>
                             {show?.adult ? "+18" : "PG-G"}
@@ -45,7 +45,8 @@ function Banner() {
                 </Styles.BannerContainer>
             </Styles.Banner>
             <Styles.Poster
-                path={`https://image.tmdb.org/t/p/original/${show?.backdrop_path}`}
+                backdrop_path={`https://image.tmdb.org/t/p/original/${show?.backdrop_path}`}
+                poster_path={`https://image.tmdb.org/t/p/original/${show?.poster_path}`}
             />
         </Styles.Container>
     );

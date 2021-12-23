@@ -1,5 +1,4 @@
-import { useState } from "react";
-import { Link, Redirect } from "react-router-dom";
+import { Link, useHistory } from "react-router-dom";
 import { useDispatch } from "react-redux";
 import { useFormik } from "formik";
 import { addEmail } from "./landingSlice";
@@ -8,11 +7,13 @@ import logoSvg from "assets/Logo.svg";
 import * as Styles from "./Landing.Styles";
 
 import { emailValidation } from "utils/validation";
+import handleAnonymous from "api/handleAnonymous";
 
 function Landing() {
-    const [redirect, setRedirect] = useState(false);
+    // const [redirect, setRedirect] = useState(false);
 
     const dispatch = useDispatch();
+    const history = useHistory();
 
     const formik = useFormik({
         initialValues: {
@@ -23,12 +24,12 @@ function Landing() {
         onSubmit: (values) => {
             // console.log(JSON.stringify(values, null, 2));
             dispatch(addEmail(values.email));
-            setRedirect(true);
+            history.push("/SignUp")
         },
     });
 
-    if (redirect) {
-        return <Redirect to="/SignUp" />;
+    const handleClick = () => {
+        handleAnonymous().then(() => history.push("/browse"));
     }
 
     return (
@@ -73,7 +74,7 @@ function Landing() {
                 <Styles.Terms>
                     Entering your email will create or restart your membership
                 </Styles.Terms>
-                <Styles.Guest as="a" href="#">
+                <Styles.Guest onClick={handleClick}>
                     Continue as a Guest
                 </Styles.Guest>
             </Styles.Main>

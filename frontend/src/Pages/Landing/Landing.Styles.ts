@@ -165,6 +165,7 @@ export const Guest = styled.a`
     font-size: 1rem;
     text-decoration: none;
     width: fit-content;
+    cursor: pointer;
 
     &:hover {
         text-decoration: underline;

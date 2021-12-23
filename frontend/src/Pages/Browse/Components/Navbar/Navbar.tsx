@@ -10,7 +10,7 @@ interface IProps {
     user: User | undefined | null;
 }
 
-function Header(props:IProps) {
+function Header(props: IProps) {
     const [isOpen, setIsOpen] = useState(false);
     const username = props.user?.displayName;
 
@@ -25,6 +25,32 @@ function Header(props:IProps) {
         signOut(auth).then(() => history.push("/"));
     };
 
+    const checkIfAnonymous = () => {
+        const handleLogin = () => {
+            history.push("/signIn");
+        };
+
+        if (props.user?.isAnonymous) {
+            return (
+                <>
+                    <Styles.P>You are not signed in</Styles.P>
+                    <Styles.P>Please SignIn First</Styles.P>
+                    <Styles.A onClick={handleLogin}>Sign in</Styles.A>
+                </>
+            );
+        } else {
+            return (
+                <>
+                    <Styles.P>Hello {username}</Styles.P>
+                    <Styles.P>
+                        Signed in with {auth.currentUser?.email}
+                    </Styles.P>
+                    <Styles.A onClick={handleLogout}>Sign out</Styles.A>
+                </>
+            );
+        }
+    };
+
     return (
         <>
             <Styles.Nav>
@@ -36,9 +62,7 @@ function Header(props:IProps) {
                 </Styles.Profile>
             </Styles.Nav>
             <Styles.Dropdown isOpen={isOpen}>
-                <Styles.P>Hello {username}</Styles.P>
-                <Styles.P>Signed in with {auth.currentUser?.email}</Styles.P>
-                <Styles.A onClick={handleLogout}>Sign out</Styles.A>
+                {checkIfAnonymous()}
             </Styles.Dropdown>
         </>
     );
