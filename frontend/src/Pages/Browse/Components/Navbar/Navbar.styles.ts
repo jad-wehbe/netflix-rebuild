@@ -8,13 +8,17 @@ export const Nav = styled.nav`
     display: flex;
     justify-content: space-between;
     align-items: center;
+    @media (max-width: 768px) {
+        width: 90%;
+        position:fixed;
+    }
 `;
 
 export const Logo = styled.img`
     width: 116px;
     height: 34px;
 
-    @media (max-width: 700px) {
+    @media (max-width: 768px) {
         width: 100px;
         height: 30px;
     }
@@ -28,6 +32,10 @@ export const Search = styled.input`
     background-color: #000;
     color: #AAA;
     font-size: 1rem;
+
+    @media (max-width: 768px) {
+        display:none;
+    }
 `
 interface isOpen {
     isOpen: boolean
