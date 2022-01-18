@@ -17,6 +17,7 @@ function Header(props: IProps) {
     const history = useHistory();
 
     const handleClick = () => {
+        console.log("Opened!!");
         setIsOpen(!isOpen);
         // console.log(auth.currentUser);
     };
@@ -54,16 +55,18 @@ function Header(props: IProps) {
     return (
         <>
             <Styles.Nav>
-                <Styles.Logo src={logoSvg} alt="Logo" />
-                <Styles.Search placeholder="I'm searching for..." />
-                <Styles.Profile onClick={handleClick}>
-                    <Styles.Avatar />
-                    <Styles.DownArrow src={DownArrow} />
-                </Styles.Profile>
+                <Styles.Container>
+                    <Styles.Logo src={logoSvg} alt="Logo" />
+                    <Styles.Search placeholder="I'm searching for..." />
+                    <Styles.Profile onClick={handleClick}>
+                        <Styles.Avatar />
+                        <Styles.DownArrow src={DownArrow} />
+                    </Styles.Profile>
+                </Styles.Container>
+                <Styles.Dropdown isOpen={isOpen}>
+                    {checkIfAnonymous()}
+                    </Styles.Dropdown>
             </Styles.Nav>
-            <Styles.Dropdown isOpen={isOpen}>
-                {checkIfAnonymous()}
-            </Styles.Dropdown>
         </>
     );
 }

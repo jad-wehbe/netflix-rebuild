@@ -3,16 +3,22 @@ import styled from "styled-components";
 
 // Nav
 export const Nav = styled.nav`
-    margin: 0 5%;
-    padding: 30px 0;
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
+    width: 100%;
     @media (max-width: 768px) {
-        width: 90%;
         position:fixed;
+        width:100%;
+        margin:0;
+        background: linear-gradient(rgba(1,1,1, 0.7), rgba(1,1,1,0) )
     }
 `;
+
+export const Container = styled.div `
+    display: flex;
+    margin: 0 5%;
+    padding: 30px 0;
+    justify-content: space-between;
+    align-items: center;
+`
 
 export const Logo = styled.img`
     width: 116px;
@@ -52,6 +58,7 @@ export const Dropdown = styled.div<isOpen>`
     background-color: #1F1F1F;
     z-index: 10;
     color: #B2b2b2b2;
+
 `
 export const P = styled.p`
     margin-bottom: 1rem;

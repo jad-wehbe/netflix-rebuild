@@ -6,6 +6,7 @@ import { onAuthStateChanged, User } from "firebase/auth";
 import { auth } from "utils/Firebase";
 import Banner from "./Components/Banner/Banner";
 import Header from "./Components/Navbar/Navbar";
+import Lists from "./Components/Lists/Lists";
 
 function Browse() {
 
@@ -29,7 +30,7 @@ function Browse() {
         <>
             <Header user={user}/>
             <Banner />
-            {/* Lists */}
+            <Lists />
         </>
     );
 }

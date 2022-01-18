@@ -5,10 +5,10 @@ export const Container = styled.div`
     position: relative;
 
     @media (max-width: 768px) {
-        height:100%;
-        display:flex;
-        position:static;
-        flex-direction:column-reverse;
+        height: 100%;
+        display: flex;
+        position: static;
+        flex-direction: column-reverse;
     }
 `;
 export const Banner = styled.div`
@@ -26,23 +26,23 @@ export const Banner = styled.div`
     );
 
     @media (max-width: 768px) {
-        position:static;
-        width:100%;
-        background:none;
-        padding-left:0;
+        position: static;
+        width: 100%;
+        background: none;
+        padding-left: 0;
     }
 `;
 
 export const BannerContainer = styled.div`
     height: 100%;
     width: 60%;
-    display:flex;
+    display: flex;
     flex-direction: column;
     justify-content: space-around;
 
     @media (max-width: 768px) {
-        width:100%;
-        background:none;
+        width: 100%;
+        background: none;
     }
 `;
 
@@ -56,8 +56,8 @@ export const Title = styled.h2`
 
     @media (max-width: 1024px) {
         font-size: 2rem;
-        font-weight:bold;
-        text-decoration:underline;
+        font-weight: bold;
+        text-decoration: underline;
         margin: 1rem;
     }
 `;
@@ -66,7 +66,7 @@ export const List = styled.ul`
     list-style: none;
 
     @media (max-width: 1024px) {
-        margin-left:1rem;
+        margin-left: 1rem;
     }
 `;
 
@@ -78,7 +78,7 @@ export const ListItem = styled.li`
     color: #b2b2b2;
 
     @media (max-width: 1024px) {
-        padding-right:1rem;
+        padding-right: 1rem;
     }
 `;
 
@@ -86,26 +86,38 @@ export const Overview = styled.p`
     color: #b2b2b2;
 
     @media (max-width: 1024px) {
-        width:90%;
-        margin-left:1rem;
-        margin-bottom:2rem;
+        width: 90%;
+        margin-left: 1rem;
+        margin-bottom: 2rem;
+    }
+`;
+
+export const Span = styled.span`
+    padding-left: 0.6rem;
+    font-weight: bold;
+    color:#888 !important;
+    cursor: pointer;
+
+    &:hover {
+    color:#999 !important;
+        text-decoration: underline;
     }
 `;
 
 export const ButtonContainer = styled.div`
     @media (max-width: 1024px) {
         margin-left: 1rem;
-        display:flex;
-        flex-direction:column;
-        align-items:center;
-        justify-content:center
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        justify-content: center;
     }
 `;
 
 export const Button = styled.button`
     cursor: pointer;
     color: #b2b2b2;
-    font-size:1rem;
+    font-size: 1rem;
     box-sizing: border-box;
     border: 2px solid #b2b2b2;
     border-radius: 100px;
@@ -114,11 +126,10 @@ export const Button = styled.button`
     margin-right: 2rem;
 
     @media (max-width: 1280px) {
-        flex:1;
+        flex: 1;
         width: 80%;
         margin-bottom: 1rem;
     }
-
 `;
 interface path {
     backdrop_path: string;
@@ -136,8 +147,18 @@ export const Poster = styled.div<path>`
     object-fit: contain;
 
     @media (max-width: 768px) {
-        position:static;
-        min-height:300px;
-        width:100%;
+        position: static;
+        min-height: 300px;
+        width: 100%;
+        background: linear-gradient(
+                rgba(0, 0, 0, 0) 30%,
+                rgba(3, 3, 3, 0.6) 80%,
+                rgba(11,11,11,0.75) 90%
+            ),
+            url(${(props) => props.backdrop_path || ""});
+        background-size: cover;
+        background-repeat: no-repeat;
+        background-position: center center;
+        object-fit: contain;
     }
 `;
