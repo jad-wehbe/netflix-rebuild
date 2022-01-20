@@ -1,0 +1,47 @@
+import styled from "styled-components"
+
+export const H2 = styled.h2``
+
+export const Container = styled.div`
+    margin-bottom: 3rem;
+`
+
+export const Posters = styled.div`
+    margin-top: 1.5rem;
+    display: flex;
+    overflow-x: scroll;
+    overflow-y: hidden;
+
+    &::-webkit-scrollbar {
+        display: none;
+    }
+`
+interface IProps {
+    background_path: string,
+    isLarge?: boolean
+}
+
+export const Poster = styled.div<IProps>`
+    height: ${(props) => props.isLarge ? 450: 169}px;
+    min-width: 300px;
+    object-fit: contain;
+    margin-right: 2rem;
+    transition: transform 450ms;
+
+    background-image: url(${(props) => props.background_path || ""});
+    background-size: cover;
+    background-repeat: no-repeat;
+    background-position: center center;
+
+    &:hover {
+        transform: scale(1.1)
+    }
+`
+
+export const Movie = styled.div`
+    height: 150px;
+    width: 100%;
+
+    max-height: inherit;
+    object-fit: contain;
+`

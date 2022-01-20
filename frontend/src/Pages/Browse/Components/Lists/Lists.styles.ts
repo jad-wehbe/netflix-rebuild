@@ -5,7 +5,3 @@ export const Container = styled.div`
     margin-top: 3rem;
     padding-left: 1rem;
 `
-
-export const H2 = styled.h2`
-
-`
