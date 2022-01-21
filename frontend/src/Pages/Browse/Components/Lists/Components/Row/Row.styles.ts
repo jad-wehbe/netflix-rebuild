@@ -1,10 +1,10 @@
-import styled from "styled-components"
+import styled from "styled-components";
 
-export const H2 = styled.h2``
+export const H2 = styled.h2``;
 
 export const Container = styled.div`
     margin-bottom: 3rem;
-`
+`;
 
 export const Posters = styled.div`
     margin-top: 1.5rem;
@@ -15,14 +15,14 @@ export const Posters = styled.div`
     &::-webkit-scrollbar {
         display: none;
     }
-`
+`;
 interface IProps {
-    background_path: string,
-    isLarge?: boolean
+    background_path: string;
+    isLarge?: boolean;
 }
 
 export const Poster = styled.div<IProps>`
-    height: ${(props) => props.isLarge ? 450: 169}px;
+    height: ${(props) => (props.isLarge ? 450 : 169)}px;
     min-width: 300px;
     object-fit: contain;
     margin-right: 2rem;
@@ -34,9 +34,12 @@ export const Poster = styled.div<IProps>`
     background-position: center center;
 
     &:hover {
-        transform: scale(1.1)
+        cursor: pointer;
+        transform: scale(1.1);
+        background: linear-gradient(rgba(20, 20, 20, 1), rgba(5, 5, 5, 0.4)),
+            url(${(props) => props.background_path || ""});
     }
-`
+`;
 
 export const Movie = styled.div`
     height: 150px;
@@ -44,4 +47,4 @@ export const Movie = styled.div`
 
     max-height: inherit;
     object-fit: contain;
-`
+`;
