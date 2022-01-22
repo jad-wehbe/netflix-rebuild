@@ -1,7 +1,8 @@
-import api from "api/axios";
+// import api from "api/axios";
 import { ResultType } from "api/requests";
 import { useEffect, useState } from "react";
 import * as Styles from "./Row.styles";
+import { test_movies } from "utils/Debug";
 
 interface IProps {
     title: string;
@@ -11,27 +12,60 @@ interface IProps {
 
 function Row(props: IProps) {
     const [movies, setMovies] = useState<ResultType[]>([]);
+    const [movieID, setMovieID] = useState<number>();
+    const [showDetails, setShowDetail] = useState(false);
+    const Title = (movie: ResultType) =>
+        movie?.name ||
+        movie?.original_title ||
+        movie?.title ||
+        movie?.original_name;
 
+    //! For Debugging
     useEffect(() => {
-        async function fetchData() {
-            const request = await api.get(props.fetchUrl);
-            setMovies(request.data.results);
-        }
-        fetchData();
-    }, [props.fetchUrl]);
+        console.log("Debugging mode");
+        setMovies(test_movies);
+        console.log(test_movies);
+    }, []);
 
-    console.log(movies);
+    // useEffect(() => {
+    //     async function fetchData() {
+    //         const request = await api.get(props.fetchUrl);
+    //         setMovies(request.data.results);
+    //     }
+    //     fetchData();
+    // }, [props.fetchUrl]);
+
+    const handleShowDetails = (movie: ResultType) => {
+        if (showDetails && movieID === movie.id)
+            return (
+                <>
+                    <h3>{Title(movie)}</h3>
+                    <p>Click to see more Details</p>
+                </>
+            );
+        else return <></>;
+    };
 
     const fetchPosters = () => {
         const baseURL = "https://image.tmdb.org/t/p/w300/";
         return movies.map((movie) => (
             <Styles.Poster
                 key={movie.id}
+                onMouseEnter={() => {
+                    setMovieID(movie.id);
+                    setShowDetail(true);
+                }}
+                onMouseLeave={() => {
+                    setMovieID(movie.id);
+                    setShowDetail(false);
+                }}
                 isLarge={props.isLargeRow}
                 background_path={`${baseURL}${
                     props.isLargeRow ? movie.poster_path : movie.backdrop_path
                 }`}
-            ></Styles.Poster>
+            >
+                {handleShowDetails(movie)}
+            </Styles.Poster>
         ));
     };
 

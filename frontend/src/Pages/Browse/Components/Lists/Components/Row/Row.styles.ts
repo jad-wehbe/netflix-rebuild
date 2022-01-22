@@ -22,7 +22,12 @@ interface IProps {
 }
 
 export const Poster = styled.div<IProps>`
-    height: ${(props) => (props.isLarge ? 450 : 169)}px;
+    display: flex;
+    flex-direction:column;
+    align-items: center;
+    justify-content: center;
+
+    height: ${(props) => (props.isLarge ? 440 : 169)}px;
     min-width: 300px;
     object-fit: contain;
     margin-right: 2rem;

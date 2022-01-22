@@ -1,6 +1,7 @@
 import { useEffect, useState } from "react";
 import * as Styles from "./Banner.styles";
 import {ResultType} from "api/requests"
+import { test_movie } from "utils/Debug";
 // import { fetchRuntime, requests, ResultType } from "api/requests";
 // import api from "api/axios";
 
@@ -10,21 +11,7 @@ function Banner() {
 
     // ! For Debugging
     useEffect(() => {
-        setShow({
-            release_date: "2022-01-01",
-            title: "Harry Potter 20th Anniversary: Return to Hogwarts",
-            adult: false,
-            backdrop_path: "/g8dafKwLfaueQ5GK0qjKTkRCBAA.jpg",
-            id: 899082,
-            genre_ids: [99],
-            original_language: "en",
-            original_title: "Harry Potter 20th Anniversary: Return to Hogwarts",
-            poster_path: "/jntLBq0MLR3hrwKaTQswxACRPMs.jpg",
-            vote_average: 8.4,
-            overview:
-                "An enchanting making-of story told through all-new in-depth interviews and cast conversations, inviting fans on a magical first-person journey through one of the most beloved film franchises of all time.",
-            runtime: 156,
-        });
+        setShow(test_movie);
     }, []);
 
     // useEffect(() => {
@@ -53,15 +40,14 @@ function Banner() {
         } else return "No overview";
     }
 
+    const showTitle = show?.name || show?.original_title || show?.title || show?.original_name;
+
     return (
         <Styles.Container>
             <Styles.Banner>
                 <Styles.BannerContainer>
                     <Styles.Title>
-                        {show?.name ||
-                            show?.original_title ||
-                            show?.original_name ||
-                            show?.title}
+                        {showTitle}
                     </Styles.Title>
                     <Styles.List>
                         <Styles.ListItem>

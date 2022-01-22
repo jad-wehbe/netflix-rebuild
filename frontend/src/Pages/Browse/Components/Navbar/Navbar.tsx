@@ -17,7 +17,6 @@ function Header(props: IProps) {
     const history = useHistory();
 
     const handleClick = () => {
-        console.log("Opened!!");
         setIsOpen(!isOpen);
         // console.log(auth.currentUser);
     };
