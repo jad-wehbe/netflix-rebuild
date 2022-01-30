@@ -18,6 +18,7 @@ export const Background = styled.div`
             rgba(0, 0, 0, 0.8) 100%
         ),
         url(${BackgroundImage}) no-repeat center center;
+    background-size: cover;
 `;
 
 // Header

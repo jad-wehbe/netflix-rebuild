@@ -3,6 +3,8 @@ import { ResultType } from "api/requests";
 import { useEffect, useState } from "react";
 import * as Styles from "./Row.styles";
 import { test_movies } from "utils/Debug";
+import { useAppDispatch } from "app/hooks";
+import { setMovie, showPopup } from "./movieSlice";
 
 interface IProps {
     title: string;
@@ -14,6 +16,9 @@ function Row(props: IProps) {
     const [movies, setMovies] = useState<ResultType[]>([]);
     const [movieID, setMovieID] = useState<number>();
     const [showDetails, setShowDetail] = useState(false);
+
+    const dispatch = useAppDispatch()
+
     const Title = (movie: ResultType) =>
         movie?.name ||
         movie?.original_title ||
@@ -46,6 +51,12 @@ function Row(props: IProps) {
         else return <></>;
     };
 
+    const handleClick = (movie: ResultType) => {
+        console.log(movie);
+        dispatch(setMovie(movie))
+        dispatch(showPopup())
+    }
+
     const fetchPosters = () => {
         const baseURL = "https://image.tmdb.org/t/p/w300/";
         return movies.map((movie) => (
@@ -55,6 +66,7 @@ function Row(props: IProps) {
                     setMovieID(movie.id);
                     setShowDetail(true);
                 }}
+                onClick={()=>handleClick(movie)}
                 onMouseLeave={() => {
                     setMovieID(movie.id);
                     setShowDetail(false);

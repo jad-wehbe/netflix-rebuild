@@ -1,11 +1,9 @@
-// import { useSelector } from "react-redux";
 import {
     BrowserRouter as Router,
     Switch,
     Route,
     Redirect,
 } from "react-router-dom";
-// import PrivateRoute from "Components/PrivateRoute";
 
 import Landing from "Pages/Landing/Landing";
 import SignIn from "Pages/SignIn/SignIn";
@@ -15,7 +13,6 @@ import SignUp from "Pages/SignUp/SignUp";
 import "./App.css";
 
 function App() {
-    // const user = useSelector((state) => state.signIn.user);
     return (
         <div className="App">
             <Router>

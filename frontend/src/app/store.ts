@@ -1,4 +1,5 @@
 import { configureStore } from "@reduxjs/toolkit";
+import movieSlice from "Pages/Browse/Components/Lists/Components/Row/movieSlice";
 import landingReducer from "Pages/Landing/landingSlice";
 import signInSlice from "Pages/SignIn/signInSlice";
 
@@ -6,6 +7,7 @@ export const store = configureStore({
     reducer: {
         email: landingReducer,
         signIn: signInSlice,
+        movie: movieSlice,
     },
 });
 
