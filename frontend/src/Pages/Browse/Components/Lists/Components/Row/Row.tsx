@@ -17,7 +17,7 @@ function Row(props: IProps) {
     const [movieID, setMovieID] = useState<number>();
     const [showDetails, setShowDetail] = useState(false);
 
-    const dispatch = useAppDispatch()
+    const dispatch = useAppDispatch();
 
     const Title = (movie: ResultType) =>
         movie?.name ||
@@ -29,7 +29,6 @@ function Row(props: IProps) {
     useEffect(() => {
         console.log("Debugging mode");
         setMovies(test_movies);
-        console.log(test_movies);
     }, []);
 
     // useEffect(() => {
@@ -53,9 +52,9 @@ function Row(props: IProps) {
 
     const handleClick = (movie: ResultType) => {
         console.log(movie);
-        dispatch(setMovie(movie))
-        dispatch(showPopup())
-    }
+        dispatch(setMovie(movie));
+        dispatch(showPopup());
+    };
 
     const fetchPosters = () => {
         const baseURL = "https://image.tmdb.org/t/p/w300/";
@@ -66,7 +65,7 @@ function Row(props: IProps) {
                     setMovieID(movie.id);
                     setShowDetail(true);
                 }}
-                onClick={()=>handleClick(movie)}
+                onClick={() => handleClick(movie)}
                 onMouseLeave={() => {
                     setMovieID(movie.id);
                     setShowDetail(false);

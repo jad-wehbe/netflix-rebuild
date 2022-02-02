@@ -5,7 +5,7 @@ const API_KEY = "e3c57b0030cdf2d733c59f17dfe98759";
 
 export interface ResultType {
     id?: number;
-    adult?: boolean
+    adult?: boolean;
     backdrop_path?: string | null;
     poster_path?: string | null;
     overview?: string;
@@ -13,10 +13,11 @@ export interface ResultType {
     original_title?: string;
     name?: string;
     original_name?: string;
-    release_date?: string
+    release_date?: string;
+    first_air_date?: string;
     vote_average?: number;
-    runtime?: number|undefined;
-    genre_ids?: number[]
+    runtime?: number | undefined;
+    genre_ids?: number[];
     original_language?: string;
 }
 
@@ -30,7 +31,7 @@ export const requests = {
     fetchRomanceMovies: `/discover/movie?api_key=${API_KEY}&with_genres=10749`,
 };
 
-export const fetchRuntime = async (id:number|undefined) => {
-  const res = await api.get(`/movie/${id}?api_key=${API_KEY}`)
-  return res.data.runtime as number|undefined;
-}
+export const fetchRuntime = async (id: number | undefined) => {
+    const res = await api.get(`/movie/${id}?api_key=${API_KEY}`);
+    return res.data.runtime as number | undefined;
+};
