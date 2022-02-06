@@ -1,7 +1,7 @@
-import {ResultType} from "api/requests"
+import { MovieInterface } from "api/requests";
 import debug_movies from "./debug_movies";
 
-const test_movie:ResultType = {
+const test_movie: MovieInterface = {
     release_date: "2022-01-01",
     title: "Harry Potter 20th Anniversary: Return to Hogwarts",
     adult: false,
@@ -15,8 +15,9 @@ const test_movie:ResultType = {
     overview:
         "An enchanting making-of story told through all-new in-depth interviews and cast conversations, inviting fans on a magical first-person journey through one of the most beloved film franchises of all time.",
     runtime: 156,
-}
+};
 
-const test_movies = debug_movies
+const test_movies = debug_movies;
 
 export { test_movie, test_movies };
+

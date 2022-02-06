@@ -1,10 +1,11 @@
 // import api from "api/axios";
-import { ResultType } from "api/requests";
-import { useEffect, useState } from "react";
+import { MovieInterface } from "api/requests";
+import { useState } from "react";
 import * as Styles from "./Row.styles";
-import { test_movies } from "utils/Debug";
+// import { test_movies } from "utils/Debug";
 import { useAppDispatch } from "app/hooks";
-import { setMovie, showPopup } from "./movieSlice";
+import { setMovie, showPopup } from "../../../movieSlice";
+import { useFetchData } from "hooks/useFetchData";
 
 interface IProps {
     title: string;
@@ -13,23 +14,25 @@ interface IProps {
 }
 
 function Row(props: IProps) {
-    const [movies, setMovies] = useState<ResultType[]>([]);
+    // const [movies, setMovies] = useState<ResultType[]>([]);
     const [movieID, setMovieID] = useState<number>();
     const [showDetails, setShowDetail] = useState(false);
 
+    const { movies } = useFetchData(props.fetchUrl);
+
     const dispatch = useAppDispatch();
 
-    const Title = (movie: ResultType) =>
+    const Title = (movie: MovieInterface) =>
         movie?.name ||
         movie?.original_title ||
         movie?.title ||
         movie?.original_name;
 
-    //! For Debugging
-    useEffect(() => {
-        console.log("Debugging mode");
-        setMovies(test_movies);
-    }, []);
+    // //! For Debugging
+    // useEffect(() => {
+    //     console.log("Debugging mode");
+    //     setMovies(test_movies);
+    // }, []);
 
     // useEffect(() => {
     //     async function fetchData() {
@@ -39,7 +42,7 @@ function Row(props: IProps) {
     //     fetchData();
     // }, [props.fetchUrl]);
 
-    const handleShowDetails = (movie: ResultType) => {
+    const handleShowDetails = (movie: MovieInterface) => {
         if (showDetails && movieID === movie.id)
             return (
                 <>
@@ -50,7 +53,7 @@ function Row(props: IProps) {
         else return <></>;
     };
 
-    const handleClick = (movie: ResultType) => {
+    const handleClick = (movie: MovieInterface) => {
         console.log(movie);
         dispatch(setMovie(movie));
         dispatch(showPopup());

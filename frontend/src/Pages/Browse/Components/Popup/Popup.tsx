@@ -1,15 +1,16 @@
-import { ResultType } from "api/requests";
 import { useEffect, useState } from "react";
+import { MovieInterface } from "api/requests";
+import { useAppDispatch } from "app/hooks";
+import { resetMovie } from "Pages/Browse/movieSlice";
 import * as Styles from "./Popup.styles";
 
 interface IProps {
-    movie: ResultType | undefined;
-    display: boolean;
+    movie: MovieInterface | undefined;
+    open: boolean;
 }
 
-// TODO: Popup not showing twice on a same movie
 function Popup(props: IProps) {
-    const [display, setDisplay] = useState(props.display);
+    const [open, setOpen] = useState(props.open);
 
     const Title =
         props.movie?.name ||
@@ -17,9 +18,11 @@ function Popup(props: IProps) {
         props.movie?.title ||
         props.movie?.original_name;
 
-    useEffect(() => setDisplay(props.display), [props]);
+    useEffect(() => setOpen(props.open), [props]);
+    console.log(props);
+    console.log(open);
 
-    console.log(props.movie);
+    const dispatch = useAppDispatch();
 
     const handleDateSplit = () => {
         const date = props.movie?.release_date || props.movie?.first_air_date;
@@ -27,7 +30,7 @@ function Popup(props: IProps) {
     };
 
     return (
-        <Styles.Popup display={display}>
+        <Styles.Popup open={open}>
             <Styles.PopupContainer>
                 <Styles.Title>{Title}</Styles.Title>
                 <Styles.List>
@@ -50,7 +53,9 @@ function Popup(props: IProps) {
                 </Styles.Overview>
                 <Styles.CloseButton
                     onClick={() => {
-                        setDisplay(false);
+                        console.log("Clickeeeddd");
+                        dispatch(resetMovie());
+                        setOpen(false);
                     }}
                 >
                     x

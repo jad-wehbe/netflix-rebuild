@@ -7,7 +7,7 @@ import { signOut, User } from "firebase/auth";
 import { useHistory } from "react-router-dom";
 
 interface IProps {
-    user: User | undefined | null;
+    user: User | null;
 }
 
 function Header(props: IProps) {
@@ -64,7 +64,7 @@ function Header(props: IProps) {
                 </Styles.Container>
                 <Styles.Dropdown isOpen={isOpen}>
                     {checkIfAnonymous()}
-                    </Styles.Dropdown>
+                </Styles.Dropdown>
             </Styles.Nav>
         </>
     );

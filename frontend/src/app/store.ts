@@ -1,5 +1,5 @@
 import { configureStore } from "@reduxjs/toolkit";
-import movieSlice from "Pages/Browse/Components/Lists/Components/Row/movieSlice";
+import movieSlice from "Pages/Browse/movieSlice";
 import landingReducer from "Pages/Landing/landingSlice";
 import signInSlice from "Pages/SignIn/signInSlice";
 

@@ -1,7 +1,7 @@
 import styled from "styled-components";
 
 interface IPopup {
-    display: boolean;
+    open: boolean;
 }
 
 export const Popup = styled.div<IPopup>`
@@ -12,7 +12,7 @@ export const Popup = styled.div<IPopup>`
     transform: translate(-50%, -50%);
     top: 50%;
     z-index: 10;
-    display: ${(props) => (props.display ? "block" : "none")};
+    display: ${(props) => (props.open ? "block" : "none")};
     background-color: #090909;
     border-radius: 10px;
     color: white;
