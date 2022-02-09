@@ -2,7 +2,7 @@
 import { MovieInterface } from "api/requests";
 import { useState } from "react";
 import * as Styles from "./Row.styles";
-// import { test_movies } from "utils/Debug";
+//import { test_movies } from "utils/Debug";
 import { useAppDispatch } from "app/hooks";
 import { setMovie, showPopup } from "../../../movieSlice";
 import { useFetchData } from "hooks/useFetchData";
@@ -14,7 +14,7 @@ interface IProps {
 }
 
 function Row(props: IProps) {
-    // const [movies, setMovies] = useState<ResultType[]>([]);
+    //const [movies, setMovies] = useState<MovieInterface[]>([]);
     const [movieID, setMovieID] = useState<number>();
     const [showDetails, setShowDetail] = useState(false);
 
@@ -28,19 +28,11 @@ function Row(props: IProps) {
         movie?.title ||
         movie?.original_name;
 
-    // //! For Debugging
-    // useEffect(() => {
-    //     console.log("Debugging mode");
-    //     setMovies(test_movies);
-    // }, []);
-
-    // useEffect(() => {
-    //     async function fetchData() {
-    //         const request = await api.get(props.fetchUrl);
-    //         setMovies(request.data.results);
-    //     }
-    //     fetchData();
-    // }, [props.fetchUrl]);
+    //! For Debugging
+    //useEffect(() => {
+    //console.log("Debugging mode");
+    //setMovies(test_movies);
+    //}, []);
 
     const handleShowDetails = (movie: MovieInterface) => {
         if (showDetails && movieID === movie.id)

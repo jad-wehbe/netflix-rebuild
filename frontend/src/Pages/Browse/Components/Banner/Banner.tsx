@@ -1,20 +1,21 @@
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import * as Styles from "./Banner.styles";
-//import { ResultType } from "api/requests";
-//import { test_movie } from "utils/Debug";
+import { MovieInterface } from "api/requests";
+import { test_movie } from "utils/Debug";
 import { useTruncate } from "hooks/useTruncate";
-import { useFetchData } from "hooks/useFetchData";
-import { requests } from "api/requests";
+//import { useFetchData } from "hooks/useFetchData";
+//import { requests } from "api/requests";
 
 function Banner() {
     const [readMore, setReadMore] = useState(false);
-    const { randMovie } = useFetchData(requests.fetchTrending);
+    //const { randMovie } = useFetchData(requests.fetchTrending);
+    const [randMovie, setRandMovie] = useState<MovieInterface>({});
     const truncate = useTruncate(randMovie.overview!, 150, readMore);
 
     // ! For Debugging
-    //useEffect(() => {
-    //setShow(test_movie);
-    //}, []);
+    useEffect(() => {
+        setRandMovie(test_movie);
+    }, []);
 
     const handleReadMore = () => {
         setReadMore(!readMore);

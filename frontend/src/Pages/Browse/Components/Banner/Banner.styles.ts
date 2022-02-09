@@ -95,11 +95,11 @@ export const Overview = styled.p`
 export const Span = styled.span`
     padding-left: 0.6rem;
     font-weight: bold;
-    color:#888 !important;
+    color: #888 !important;
     cursor: pointer;
 
     &:hover {
-    color:#999 !important;
+        color: #999 !important;
         text-decoration: underline;
     }
 `;
@@ -141,6 +141,7 @@ export const Poster = styled.div<path>`
     width: 70%;
     float: right;
     background-image: url(${(props) => props.backdrop_path || ""});
+    background-color: grey;
     background-size: cover;
     background-repeat: no-repeat;
     background-position: center center;
@@ -153,7 +154,7 @@ export const Poster = styled.div<path>`
         background: linear-gradient(
                 rgba(0, 0, 0, 0) 30%,
                 rgba(3, 3, 3, 0.6) 80%,
-                rgba(11,11,11,0.75) 90%
+                rgba(11, 11, 11, 0.75) 90%
             ),
             url(${(props) => props.backdrop_path || ""});
         background-size: cover;
