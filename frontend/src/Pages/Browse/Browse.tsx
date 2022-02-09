@@ -3,17 +3,18 @@ import { useHistory } from "react-router-dom";
 import { onAuthStateChanged, User } from "firebase/auth";
 import { auth } from "utils/Firebase";
 import { useAppSelector } from "app/hooks";
-import Banner from "./Components/Banner/Banner";
-import Header from "./Components/Navbar/Navbar";
-import Lists from "./Components/Lists/Lists";
-import Popup from "./Components/Popup/Popup";
+import { Popup, Header, Banner, Lists } from "./Components";
 import * as Styles from "./Browse.styles";
+//import { test_movie } from "utils/Debug";
 
 function Browse() {
     const [user, setUser] = useState<User | null>(null);
 
     const movie = useAppSelector((state) => state.movie.movie);
     const open = useAppSelector((state) => state.movie.popup);
+    // For Debugging Onlyy !!!
+    //const movie = test_movie;
+    //const open = true;
 
     const history = useHistory();
 
@@ -32,9 +33,11 @@ function Browse() {
     return (
         <Styles.Container>
             <Popup movie={movie} open={open} />
-            <Header user={user} />
-            <Banner />
-            <Lists />
+            <Styles.Mask blur={open}>
+                <Header user={user} />
+                <Banner />
+                <Lists />
+            </Styles.Mask>
         </Styles.Container>
     );
 }

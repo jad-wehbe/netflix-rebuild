@@ -23,7 +23,7 @@ interface IProps {
 
 export const Poster = styled.div<IProps>`
     display: flex;
-    flex-direction:column;
+    flex-direction: column;
     align-items: center;
     justify-content: center;
 
@@ -34,6 +34,7 @@ export const Poster = styled.div<IProps>`
     transition: transform 450ms;
 
     background-image: url(${(props) => props.background_path || ""});
+    background-color: grey;
     background-size: cover;
     background-repeat: no-repeat;
     background-position: center center;
