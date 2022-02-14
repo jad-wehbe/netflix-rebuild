@@ -11,18 +11,24 @@ function Banner() {
     const [readMore, setReadMore] = useState(false);
     const { randMovie } = useFetchData(requests.fetchTrending);
     //const [randMovie, setRandMovie] = useState<MovieInterface>({});
-    const truncate = useTruncate(randMovie.overview!, 150, readMore);
+    const [truncate, showReadMore] = useTruncate(randMovie.overview!, 150, readMore);
 
     // ! For Debugging
     //useEffect(() => {
     //setRandMovie(test_movie);
     //}, []);
 
-    const handleReadMore = () => {
-        setReadMore(!readMore);
-    };
-
     const Title = getTitle(randMovie);
+
+    const ReadMore = (): JSX.Element => {
+        return showReadMore ? (
+            <Styles.Span onClick={() => setReadMore(!ReadMore)}>
+                {readMore ? "Read Less" : "Read More"}
+            </Styles.Span>
+        ) : (
+            <></>
+        );
+    };
 
     return (
         <Styles.Container>
@@ -47,9 +53,7 @@ function Banner() {
                     </Styles.List>
                     <Styles.Overview>
                         {truncate}
-                        <Styles.Span onClick={handleReadMore}>
-                            {readMore ? "Read Less" : "Read More"}
-                        </Styles.Span>
+                        {ReadMore()}
                     </Styles.Overview>
                     <Styles.ButtonContainer>
                         <Styles.Button>Play</Styles.Button>

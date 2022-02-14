@@ -14,7 +14,7 @@ interface IProps {
 function Popup(props: IProps) {
     const [readMore, setReadMore] = useState(false);
     const [open, setOpen] = useState(false);
-    const truncate = useTruncate(props.movie?.overview!, 150, readMore);
+    const [truncate, showReadMore] = useTruncate(props.movie?.overview!, 150, readMore);
 
     const dispatch = useAppDispatch();
 
@@ -22,8 +22,14 @@ function Popup(props: IProps) {
 
     const Title = getTitle(props.movie!);
 
-    const handleReadMore = () => {
-        setReadMore(!readMore);
+    const ReadMore = (): JSX.Element => {
+        return showReadMore ? (
+            <Styles.Span onClick={() => setReadMore(!ReadMore)}>
+                {readMore ? "Read Less" : "Read More"}
+            </Styles.Span>
+        ) : (
+            <></>
+        );
     };
 
     const handleDateSplit = () => {
@@ -38,18 +44,14 @@ function Popup(props: IProps) {
                     <Styles.Details>
                         <Styles.Title>{Title}</Styles.Title>
                         <Styles.List>
-                            <Styles.ListItem>
-                                {handleDateSplit()}
-                            </Styles.ListItem>
+                            <Styles.ListItem>{handleDateSplit()}</Styles.ListItem>
                             <Styles.ListItem>
                                 {props.movie?.adult ? "+18" : "PG-G"}
                             </Styles.ListItem>
                             <Styles.ListItem>
                                 Rate: {props.movie?.vote_average}
                             </Styles.ListItem>
-                            <Styles.ListItem>
-                                {props.movie?.runtime} min
-                            </Styles.ListItem>
+                            <Styles.ListItem>{props.movie?.runtime} min</Styles.ListItem>
                             <Styles.ListItem>
                                 en-
                                 {props.movie?.original_language?.toLocaleUpperCase()}
@@ -57,9 +59,7 @@ function Popup(props: IProps) {
                         </Styles.List>
                         <Styles.Overview>
                             {truncate}
-                            <Styles.Span onClick={handleReadMore}>
-                                {readMore ? "Read Less" : "Read More"}
-                            </Styles.Span>
+                            {ReadMore()}
                         </Styles.Overview>
                     </Styles.Details>
                     <Styles.Poster
