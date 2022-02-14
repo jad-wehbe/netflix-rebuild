@@ -4,6 +4,7 @@ import { useAppDispatch } from "app/hooks";
 import { resetMovie } from "Pages/Browse/movieSlice";
 import { useTruncate } from "hooks/useTruncate";
 import * as Styles from "./Popup.styles";
+import { getTitle } from "utils/getTitle";
 
 interface IProps {
     movie: MovieInterface | undefined;
@@ -19,11 +20,7 @@ function Popup(props: IProps) {
 
     useEffect(() => setOpen(props.open), [props]);
 
-    const Title =
-        props.movie?.name ||
-        props.movie?.original_title ||
-        props.movie?.title ||
-        props.movie?.original_name;
+    const Title = getTitle(props.movie!);
 
     const handleReadMore = () => {
         setReadMore(!readMore);

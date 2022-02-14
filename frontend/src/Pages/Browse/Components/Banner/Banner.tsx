@@ -1,31 +1,28 @@
-import { useState, useEffect } from "react";
+import { useState } from "react";
 import * as Styles from "./Banner.styles";
-import { MovieInterface } from "api/requests";
-import { test_movie } from "utils/Debug";
+//import { MovieInterface } from "api/requests";
+//import { test_movie } from "utils/Debug";
 import { useTruncate } from "hooks/useTruncate";
-//import { useFetchData } from "hooks/useFetchData";
-//import { requests } from "api/requests";
+import { getTitle } from "utils/getTitle";
+import { useFetchData } from "hooks/useFetchData";
+import { requests } from "api/requests";
 
 function Banner() {
     const [readMore, setReadMore] = useState(false);
-    //const { randMovie } = useFetchData(requests.fetchTrending);
-    const [randMovie, setRandMovie] = useState<MovieInterface>({});
+    const { randMovie } = useFetchData(requests.fetchTrending);
+    //const [randMovie, setRandMovie] = useState<MovieInterface>({});
     const truncate = useTruncate(randMovie.overview!, 150, readMore);
 
     // ! For Debugging
-    useEffect(() => {
-        setRandMovie(test_movie);
-    }, []);
+    //useEffect(() => {
+    //setRandMovie(test_movie);
+    //}, []);
 
     const handleReadMore = () => {
         setReadMore(!readMore);
     };
 
-    const Title =
-        randMovie?.name ||
-        randMovie?.original_title ||
-        randMovie?.title ||
-        randMovie?.original_name;
+    const Title = getTitle(randMovie);
 
     return (
         <Styles.Container>
@@ -41,12 +38,8 @@ function Banner() {
                         <Styles.ListItem>
                             {randMovie?.adult ? "+18" : "PG-G"}
                         </Styles.ListItem>
-                        <Styles.ListItem>
-                            Rate: {randMovie?.vote_average}
-                        </Styles.ListItem>
-                        <Styles.ListItem>
-                            {randMovie?.runtime} min
-                        </Styles.ListItem>
+                        <Styles.ListItem>Rate: {randMovie?.vote_average}</Styles.ListItem>
+                        <Styles.ListItem>{randMovie?.runtime} min</Styles.ListItem>
                         <Styles.ListItem>
                             en-
                             {randMovie?.original_language?.toLocaleUpperCase()}

@@ -6,6 +6,7 @@ import * as Styles from "./Row.styles";
 import { useAppDispatch } from "app/hooks";
 import { setMovie, showPopup } from "../../../movieSlice";
 import { useFetchData } from "hooks/useFetchData";
+import { getTitle } from "utils/getTitle";
 
 interface IProps {
     title: string;
@@ -22,12 +23,6 @@ function Row(props: IProps) {
 
     const dispatch = useAppDispatch();
 
-    const Title = (movie: MovieInterface) =>
-        movie?.name ||
-        movie?.original_title ||
-        movie?.title ||
-        movie?.original_name;
-
     //! For Debugging
     //useEffect(() => {
     //console.log("Debugging mode");
@@ -38,7 +33,7 @@ function Row(props: IProps) {
         if (showDetails && movieID === movie.id)
             return (
                 <>
-                    <h3>{Title(movie)}</h3>
+                    <h3>{getTitle(movie)}</h3>
                     <p>Click to see more Details</p>
                 </>
             );
