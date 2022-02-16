@@ -22,7 +22,11 @@ function Banner() {
 
     const ReadMore = (): JSX.Element => {
         return showReadMore ? (
-            <Styles.Span onClick={() => setReadMore(!ReadMore)}>
+            <Styles.Span
+                onClick={() => {
+                    setReadMore(!readMore);
+                }}
+            >
                 {readMore ? "Read Less" : "Read More"}
             </Styles.Span>
         ) : (

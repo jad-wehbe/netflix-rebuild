@@ -17,14 +17,14 @@ export interface MovieInterface {
     overview?: string;
     poster_path?: string | null;
     release_date?: string;
-    runtime?: number | undefined;
+    runtime?: number;
     title?: string;
     vote_average?: number;
 }
 
 export const requests = {
     fetchTrending: `/trending/movie/week?api_key=${API_KEY}&language=en-US`,
-    fetchNetflixOriginals: `/discover/tv?api_key=${API_KEY}&with_networks=213`,
+    fetchNetflixOriginals: `/discover/movie?api_key=${API_KEY}&with_networks=213`,
     fetchTopRated: `/movie/top_rated?api_key=${API_KEY}&language=en-US`,
     fetchActionMovies: `/discover/movie?api_key=${API_KEY}&with_genres=28`,
     fetchComedyMovies: `/discover/movie?api_key=${API_KEY}&with_genres=35`,
@@ -38,5 +38,29 @@ export const fetchMovieRuntime = async (id: number, media_type = "movie") => {
         return res.data.runtime as number;
     } catch (err) {
         console.error(err);
+        return;
+    }
+};
+
+interface IMovieTrailer {
+    name?: string;
+    key?: string;
+    site?: string;
+    type?: string;
+    official?: boolean;
+}
+
+interface results {
+    id?: number;
+    results?: Array<IMovieTrailer>;
+}
+
+export const fetchMovieTrailer = async (id: number) => {
+    try {
+        const res = await api.get<results>(`/movie/${id}/videos?api_key=${API_KEY}`);
+        return res.data.results;
+    } catch (err) {
+        console.error(err);
+        return;
     }
 };
