@@ -109,12 +109,14 @@ export const CloseButton = styled.button`
     position: absolute;
     top: 0;
     right: 0;
-    height: 30px;
-    width: 30px;
+    height: 70px;
+    width: 70px;
+    padding: 0 0 10px 10px;
     cursor: pointer;
-    background: none;
-    border: 1px solid #b2b2b2;
-    color: #b2b2b2;
+    border: none;
+    border-radius: 0 0 0 70px;
+    color: #333;
+    background: #aaaaaa;
 `;
 
 interface path {

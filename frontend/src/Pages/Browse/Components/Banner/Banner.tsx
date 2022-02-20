@@ -1,7 +1,5 @@
 import { useState } from "react";
 import * as Styles from "./Banner.styles";
-//import { MovieInterface } from "api/requests";
-//import { test_movie } from "utils/Debug";
 import { useTruncate } from "hooks/useTruncate";
 import { getTitle } from "utils/getTitle";
 import { useFetchData } from "hooks/useFetchData";
@@ -10,13 +8,7 @@ import { requests } from "api/requests";
 function Banner() {
     const [readMore, setReadMore] = useState(false);
     const { randMovie } = useFetchData(requests.fetchTrending);
-    //const [randMovie, setRandMovie] = useState<MovieInterface>({});
     const [truncate, showReadMore] = useTruncate(randMovie.overview!, 150, readMore);
-
-    // ! For Debugging
-    //useEffect(() => {
-    //setRandMovie(test_movie);
-    //}, []);
 
     const Title = getTitle(randMovie);
 
@@ -48,7 +40,9 @@ function Banner() {
                         <Styles.ListItem>
                             {randMovie?.adult ? "+18" : "PG-G"}
                         </Styles.ListItem>
-                        <Styles.ListItem>Rate: {randMovie?.vote_average}</Styles.ListItem>
+                        <Styles.ListItem>
+                            Rate: {randMovie?.vote_average}/10
+                        </Styles.ListItem>
                         <Styles.ListItem>{randMovie?.runtime} min</Styles.ListItem>
                         <Styles.ListItem>
                             en-

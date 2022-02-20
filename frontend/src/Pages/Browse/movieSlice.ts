@@ -7,7 +7,7 @@ interface movieState {
 }
 
 const initialState: movieState = {
-    movie: undefined,
+    movie: {},
     popup: false,
 };
 
@@ -19,7 +19,7 @@ export const movieSlice = createSlice({
             state.movie = action.payload;
         },
         resetMovie: (state) => {
-            state.movie = undefined;
+            state.movie = {};
             state.popup = false;
         },
         showPopup: (state) => {

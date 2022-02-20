@@ -1,26 +1,12 @@
 import { useEffect, useState } from "react";
-import { fetchMovieTrailer, MovieInterface } from "api/requests";
+import { MovieInterface } from "api/requests";
 import { useAppDispatch } from "app/hooks";
 import { resetMovie } from "Pages/Browse/movieSlice";
 import { useTruncate } from "hooks/useTruncate";
-import * as Styles from "./Popup.styles";
-import ReactPlayer from "react-player/lazy";
+import { useFetchTrailer } from "hooks/useFetchTrailer";
 import { getTitle } from "utils/getTitle";
-
-const useFetchTrailer = (id?: number) => {
-    const [key, setKey] = useState<string>();
-
-    useEffect(() => {
-        async function fetchTrailer() {
-            const res = await fetchMovieTrailer(id!);
-            if (res) setKey(res[0].key!);
-        }
-        fetchTrailer();
-    }, [id]);
-
-    const trailer = key ? `https://www.youtube.com/watch?v=${key}` : undefined;
-    return trailer;
-};
+import ReactPlayer from "react-player/lazy";
+import * as Styles from "./Popup.styles";
 
 interface IProps {
     movie: MovieInterface | undefined;
@@ -72,7 +58,7 @@ function Popup(props: IProps) {
                                 {props.movie?.adult ? "+18" : "PG-G"}
                             </Styles.ListItem>
                             <Styles.ListItem>
-                                Rate: {props.movie?.vote_average}
+                                Rate: {props.movie?.vote_average}/10
                             </Styles.ListItem>
                             <Styles.ListItem>{props.movie?.runtime} min</Styles.ListItem>
                             <Styles.ListItem>

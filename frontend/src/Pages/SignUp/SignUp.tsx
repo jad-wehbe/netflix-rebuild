@@ -1,4 +1,5 @@
 import { useState, useEffect } from "react";
+import { Helmet } from "react-helmet";
 import { Link } from "react-router-dom";
 import { useFormik } from "formik";
 
@@ -42,90 +43,90 @@ function SignUp() {
     });
 
     return (
-        <Styles.Background>
-            <Styles.Header>
-                <Link to="/">
-                    <Styles.Logo src={logoSvg} />
-                </Link>
-            </Styles.Header>
-            <Styles.Form onSubmit={formik.handleSubmit}>
-                <Styles.Container>
-                    <Styles.H2>Sign Up</Styles.H2>
+        <>
+            <Helmet>
+                <title>Sign Up Page</title>
+            </Helmet>
+            <Styles.Background>
+                <Styles.Header>
+                    <Link to="/">
+                        <Styles.Logo src={logoSvg} />
+                    </Link>
+                </Styles.Header>
+                <Styles.Form onSubmit={formik.handleSubmit}>
+                    <Styles.Container>
+                        <Styles.H2>Sign Up</Styles.H2>
 
-                    {formik.touched.username && formik.errors.username ? (
-                        <Styles.Error>{formik.errors.username}</Styles.Error>
-                    ) : null}
+                        {formik.touched.username && formik.errors.username ? (
+                            <Styles.Error>{formik.errors.username}</Styles.Error>
+                        ) : null}
 
-                    <Styles.Input
-                        id="username"
-                        name="username"
-                        type="text"
-                        placeholder="First Name"
-                        onChange={formik.handleChange}
-                        onBlur={formik.handleBlur}
-                        value={formik.values.username}
-                    />
+                        <Styles.Input
+                            id="username"
+                            name="username"
+                            type="text"
+                            placeholder="First Name"
+                            onChange={formik.handleChange}
+                            onBlur={formik.handleBlur}
+                            value={formik.values.username}
+                        />
 
-                    {formik.touched.email && formik.errors.email ? (
-                        <Styles.Error>{formik.errors.email}</Styles.Error>
-                    ) : null}
+                        {formik.touched.email && formik.errors.email ? (
+                            <Styles.Error>{formik.errors.email}</Styles.Error>
+                        ) : null}
 
-                    <Styles.Input
-                        exist={exist}
-                        disabled={exist}
-                        id="email"
-                        name="email"
-                        type="email"
-                        placeholder="Email"
-                        onChange={formik.handleChange}
-                        onBlur={formik.handleBlur}
-                        value={formik.values.email}
-                    />
+                        <Styles.Input
+                            exist={exist}
+                            disabled={exist}
+                            id="email"
+                            name="email"
+                            type="email"
+                            placeholder="Email"
+                            onChange={formik.handleChange}
+                            onBlur={formik.handleBlur}
+                            value={formik.values.email}
+                        />
 
-                    {formik.touched.password && formik.errors.password ? (
-                        <Styles.Error>{formik.errors.password}</Styles.Error>
-                    ) : null}
+                        {formik.touched.password && formik.errors.password ? (
+                            <Styles.Error>{formik.errors.password}</Styles.Error>
+                        ) : null}
 
-                    <Styles.Input
-                        id="password"
-                        name="password"
-                        type="password"
-                        placeholder="Password"
-                        onChange={formik.handleChange}
-                        onBlur={formik.handleBlur}
-                        value={formik.values.password}
-                    />
+                        <Styles.Input
+                            id="password"
+                            name="password"
+                            type="password"
+                            placeholder="Password"
+                            onChange={formik.handleChange}
+                            onBlur={formik.handleBlur}
+                            value={formik.values.password}
+                        />
 
-                    {formik.touched.verifyPassword &&
-                    formik.errors.verifyPassword ? (
-                        <Styles.Error>
-                            {formik.errors.verifyPassword}
-                        </Styles.Error>
-                    ) : null}
+                        {formik.touched.verifyPassword && formik.errors.verifyPassword ? (
+                            <Styles.Error>{formik.errors.verifyPassword}</Styles.Error>
+                        ) : null}
 
-                    <Styles.Input
-                        id="verifyPassword"
-                        name="verifyPassword"
-                        type="password"
-                        placeholder="Verify Password"
-                        onChange={formik.handleChange}
-                        onBlur={formik.handleBlur}
-                        value={formik.values.verifyPassword}
-                    />
+                        <Styles.Input
+                            id="verifyPassword"
+                            name="verifyPassword"
+                            type="password"
+                            placeholder="Verify Password"
+                            onChange={formik.handleChange}
+                            onBlur={formik.handleBlur}
+                            value={formik.values.verifyPassword}
+                        />
 
-                    <Styles.SignInButton type="submit">
-                        Sign Up
-                    </Styles.SignInButton>
+                        <Styles.SignInButton type="submit">Sign Up</Styles.SignInButton>
 
-                    <Styles.Paragraph>
-                        Already have an account?
-                        <Styles.Span>
-                            <Link to="/SignIn">Sign In Now</Link>
-                        </Styles.Span>
-                    </Styles.Paragraph>
-                </Styles.Container>
-            </Styles.Form>
-        </Styles.Background>
+                        <Styles.Paragraph>
+                            Already have an account?
+                            <Styles.Span>
+                                <Link to="/SignIn">Sign In Now</Link>
+                            </Styles.Span>
+                        </Styles.Paragraph>
+                    </Styles.Container>
+                </Styles.Form>
+            </Styles.Background>
+        </>
     );
 }
 

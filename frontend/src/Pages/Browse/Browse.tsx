@@ -1,5 +1,6 @@
 import { useState, useEffect } from "react";
 import { useHistory } from "react-router-dom";
+import { Helmet } from "react-helmet";
 import { onAuthStateChanged, User } from "firebase/auth";
 import { auth } from "utils/Firebase";
 import { useAppSelector } from "app/hooks";
@@ -31,14 +32,19 @@ function Browse() {
     }, [history]);
 
     return (
-        <Styles.Container>
-            <Popup movie={movie} open={open} />
-            <Styles.Mask blur={open}>
-                <Header user={user} />
-                <Banner />
-                <Lists />
-            </Styles.Mask>
-        </Styles.Container>
+        <>
+            <Helmet>
+                <title>Browse Page</title>
+            </Helmet>
+            <Styles.Container StopScroll={open}>
+                <Popup movie={movie} open={open} />
+                <Styles.Mask blur={open}>
+                    <Header user={user} />
+                    <Banner />
+                    <Lists />
+                </Styles.Mask>
+            </Styles.Container>
+        </>
     );
 }
 

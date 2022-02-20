@@ -42,9 +42,7 @@ function Header(props: IProps) {
             return (
                 <>
                     <Styles.P>Hello {username}</Styles.P>
-                    <Styles.P>
-                        Signed in with {auth.currentUser?.email}
-                    </Styles.P>
+                    <Styles.P>Signed in with {auth.currentUser?.email}</Styles.P>
                     <Styles.A onClick={handleLogout}>Sign out</Styles.A>
                 </>
             );
@@ -56,15 +54,12 @@ function Header(props: IProps) {
             <Styles.Nav>
                 <Styles.Container>
                     <Styles.Logo src={logoSvg} alt="Logo" />
-                    <Styles.Search placeholder="I'm searching for..." />
                     <Styles.Profile onClick={handleClick}>
                         <Styles.Avatar />
                         <Styles.DownArrow src={DownArrow} />
                     </Styles.Profile>
                 </Styles.Container>
-                <Styles.Dropdown isOpen={isOpen}>
-                    {checkIfAnonymous()}
-                </Styles.Dropdown>
+                <Styles.Dropdown isOpen={isOpen}>{checkIfAnonymous()}</Styles.Dropdown>
             </Styles.Nav>
         </>
     );

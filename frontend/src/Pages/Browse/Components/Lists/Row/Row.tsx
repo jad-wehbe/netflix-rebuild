@@ -1,8 +1,6 @@
-// import api from "api/axios";
 import { MovieInterface } from "api/requests";
 import { useState } from "react";
 import * as Styles from "./Row.styles";
-//import { test_movies } from "utils/Debug";
 import { useAppDispatch } from "app/hooks";
 import { setMovie, showPopup } from "../../../movieSlice";
 import { useFetchData } from "hooks/useFetchData";
@@ -15,19 +13,12 @@ interface IProps {
 }
 
 function Row(props: IProps) {
-    //const [movies, setMovies] = useState<MovieInterface[]>([]);
     const [movieID, setMovieID] = useState<number>();
     const [showDetails, setShowDetail] = useState(false);
 
     const { movies } = useFetchData(props.fetchUrl);
 
     const dispatch = useAppDispatch();
-
-    //! For Debugging
-    //useEffect(() => {
-    //console.log("Debugging mode");
-    //setMovies(test_movies);
-    //}, []);
 
     const handleShowDetails = (movie: MovieInterface) => {
         if (showDetails && movieID === movie.id)
@@ -41,7 +32,6 @@ function Row(props: IProps) {
     };
 
     const handleClick = (movie: MovieInterface) => {
-        console.log(movie);
         dispatch(setMovie(movie));
         dispatch(showPopup());
     };
