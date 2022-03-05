@@ -5,6 +5,7 @@ import { useState } from "react";
 import { auth } from "utils/Firebase";
 import { signOut, User } from "firebase/auth";
 import { useHistory } from "react-router-dom";
+import avatar from "assets/avatar.png";
 
 interface IProps {
     user: User | null;
@@ -42,7 +43,9 @@ function Header(props: IProps) {
             return (
                 <>
                     <Styles.P>Hello {username}</Styles.P>
-                    <Styles.P>Signed in with {auth.currentUser?.email}</Styles.P>
+                    <Styles.P>
+                        Signed in with {auth.currentUser?.email}
+                    </Styles.P>
                     <Styles.A onClick={handleLogout}>Sign out</Styles.A>
                 </>
             );
@@ -55,11 +58,13 @@ function Header(props: IProps) {
                 <Styles.Container>
                     <Styles.Logo src={logoSvg} alt="Logo" />
                     <Styles.Profile onClick={handleClick}>
-                        <Styles.Avatar />
+                        <Styles.Avatar src={avatar} />
                         <Styles.DownArrow src={DownArrow} />
                     </Styles.Profile>
                 </Styles.Container>
-                <Styles.Dropdown isOpen={isOpen}>{checkIfAnonymous()}</Styles.Dropdown>
+                <Styles.Dropdown isOpen={isOpen}>
+                    {checkIfAnonymous()}
+                </Styles.Dropdown>
             </Styles.Nav>
         </>
     );

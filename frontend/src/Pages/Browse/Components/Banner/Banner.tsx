@@ -4,13 +4,20 @@ import { useTruncate } from "hooks/useTruncate";
 import { getTitle } from "utils/getTitle";
 import { useFetchData } from "hooks/useFetchData";
 import { requests } from "api/requests";
+import { useAppDispatch } from "app/hooks";
+import { setMovie, showPopup } from "Pages/Browse/movieSlice";
 
 function Banner() {
     const [readMore, setReadMore] = useState(false);
     const { randMovie } = useFetchData(requests.fetchTrending);
-    const [truncate, showReadMore] = useTruncate(randMovie.overview!, 150, readMore);
+    const [truncate, showReadMore] = useTruncate(
+        randMovie.overview!,
+        150,
+        readMore
+    );
 
     const Title = getTitle(randMovie);
+    const dispatch = useAppDispatch();
 
     const ReadMore = (): JSX.Element => {
         return showReadMore ? (
@@ -24,6 +31,11 @@ function Banner() {
         ) : (
             <></>
         );
+    };
+
+    const handleClick = () => {
+        dispatch(setMovie(randMovie));
+        dispatch(showPopup());
     };
 
     return (
@@ -43,7 +55,9 @@ function Banner() {
                         <Styles.ListItem>
                             Rate: {randMovie?.vote_average}/10
                         </Styles.ListItem>
-                        <Styles.ListItem>{randMovie?.runtime} min</Styles.ListItem>
+                        <Styles.ListItem>
+                            {randMovie?.runtime} min
+                        </Styles.ListItem>
                         <Styles.ListItem>
                             en-
                             {randMovie?.original_language?.toLocaleUpperCase()}
@@ -53,10 +67,7 @@ function Banner() {
                         {truncate}
                         {ReadMore()}
                     </Styles.Overview>
-                    <Styles.ButtonContainer>
-                        <Styles.Button>Play</Styles.Button>
-                        <Styles.Button>My list</Styles.Button>
-                    </Styles.ButtonContainer>
+                    <Styles.Button onClick={handleClick}>Play</Styles.Button>
                 </Styles.BannerContainer>
             </Styles.Banner>
             <Styles.Poster

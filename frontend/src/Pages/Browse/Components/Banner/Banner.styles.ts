@@ -104,17 +104,10 @@ export const Span = styled.span`
     }
 `;
 
-export const ButtonContainer = styled.div`
-    @media (max-width: 1024px) {
-        margin-left: 1rem;
-        display: flex;
-        flex-direction: column;
-        align-items: center;
-        justify-content: center;
-    }
-`;
-
 export const Button = styled.button`
+    width: 80%;
+    max-width: 600px;
+
     cursor: pointer;
     color: #b2b2b2;
     font-size: 1rem;
@@ -123,7 +116,6 @@ export const Button = styled.button`
     border-radius: 100px;
     background-color: transparent;
     padding: 1rem 4rem;
-    margin-right: 2rem;
 
     @media (max-width: 1280px) {
         flex: 1;
@@ -161,5 +153,7 @@ export const Poster = styled.div<path>`
         background-repeat: no-repeat;
         background-position: center center;
         object-fit: contain;
+        z-index: -10;
+        margin-bottom: -60px;
     }
 `;

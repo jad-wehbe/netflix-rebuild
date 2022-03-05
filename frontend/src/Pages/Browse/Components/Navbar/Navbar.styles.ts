@@ -72,12 +72,12 @@ export const Profile = styled.button`
     gap: 0.8rem;
 `;
 
-export const Avatar = styled.div`
+export const Avatar = styled.img`
     width: 40px;
     height: 40px;
+    object-fit: contain;
     background-color: lightgrey;
     border-radius: 100%;
 `;
 
 export const DownArrow = styled.img``;
-

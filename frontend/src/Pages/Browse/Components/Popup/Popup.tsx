@@ -16,7 +16,11 @@ interface IProps {
 function Popup(props: IProps) {
     const [readMore, setReadMore] = useState(false);
     const [open, setOpen] = useState(false);
-    const [truncate, showReadMore] = useTruncate(props.movie?.overview!, 150, readMore);
+    const [truncate, showReadMore] = useTruncate(
+        props.movie?.overview!,
+        150,
+        readMore
+    );
     const trailer = useFetchTrailer(props.movie?.id);
 
     const dispatch = useAppDispatch();
@@ -51,16 +55,20 @@ function Popup(props: IProps) {
             <Styles.PopupContainer>
                 <Styles.MovieContainer>
                     <Styles.Details>
-                        <Styles.Title>{Title}</Styles.Title>
+                        <Styles.Title>{Title || "Title"}</Styles.Title>
                         <Styles.List>
-                            <Styles.ListItem>{handleDateSplit()}</Styles.ListItem>
+                            <Styles.ListItem>
+                                {handleDateSplit()}
+                            </Styles.ListItem>
                             <Styles.ListItem>
                                 {props.movie?.adult ? "+18" : "PG-G"}
                             </Styles.ListItem>
                             <Styles.ListItem>
-                                Rate: {props.movie?.vote_average}/10
+                                Rate: {props.movie?.vote_average || "- "}/10
                             </Styles.ListItem>
-                            <Styles.ListItem>{props.movie?.runtime} min</Styles.ListItem>
+                            <Styles.ListItem>
+                                {props.movie?.runtime || "- "} min
+                            </Styles.ListItem>
                             <Styles.ListItem>
                                 en-
                                 {props.movie?.original_language?.toLocaleUpperCase()}
@@ -76,10 +84,14 @@ function Popup(props: IProps) {
                         poster_path={`https://image.tmdb.org/t/p/original/${props.movie?.poster_path}`}
                     />
                 </Styles.MovieContainer>
-                {trailer ? <ReactPlayer url={trailer} controls /> : <Styles.Box />}
-                <Styles.ButtonContainer>
-                    <Styles.Button>My list</Styles.Button>
-                </Styles.ButtonContainer>
+                <Styles.Box>
+                    <ReactPlayer
+                        width="100%"
+                        height="100%"
+                        url={trailer}
+                        controls
+                    />
+                </Styles.Box>
 
                 <Styles.CloseButton
                     onClick={() => {
