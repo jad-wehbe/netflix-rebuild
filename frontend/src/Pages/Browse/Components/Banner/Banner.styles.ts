@@ -95,26 +95,19 @@ export const Overview = styled.p`
 export const Span = styled.span`
     padding-left: 0.6rem;
     font-weight: bold;
-    color:#888 !important;
+    color: #888 !important;
     cursor: pointer;
 
     &:hover {
-    color:#999 !important;
+        color: #999 !important;
         text-decoration: underline;
     }
 `;
 
-export const ButtonContainer = styled.div`
-    @media (max-width: 1024px) {
-        margin-left: 1rem;
-        display: flex;
-        flex-direction: column;
-        align-items: center;
-        justify-content: center;
-    }
-`;
-
 export const Button = styled.button`
+    width: 80%;
+    max-width: 600px;
+
     cursor: pointer;
     color: #b2b2b2;
     font-size: 1rem;
@@ -123,7 +116,6 @@ export const Button = styled.button`
     border-radius: 100px;
     background-color: transparent;
     padding: 1rem 4rem;
-    margin-right: 2rem;
 
     @media (max-width: 1280px) {
         flex: 1;
@@ -141,6 +133,7 @@ export const Poster = styled.div<path>`
     width: 70%;
     float: right;
     background-image: url(${(props) => props.backdrop_path || ""});
+    background-color: grey;
     background-size: cover;
     background-repeat: no-repeat;
     background-position: center center;
@@ -153,12 +146,14 @@ export const Poster = styled.div<path>`
         background: linear-gradient(
                 rgba(0, 0, 0, 0) 30%,
                 rgba(3, 3, 3, 0.6) 80%,
-                rgba(11,11,11,0.75) 90%
+                rgba(11, 11, 11, 0.75) 90%
             ),
             url(${(props) => props.backdrop_path || ""});
         background-size: cover;
         background-repeat: no-repeat;
         background-position: center center;
         object-fit: contain;
+        z-index: -10;
+        margin-bottom: -60px;
     }
 `;

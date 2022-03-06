@@ -1,8 +1,10 @@
-// import api from "api/axios";
-import { ResultType } from "api/requests";
-import { useEffect, useState } from "react";
+import { MovieInterface } from "api/requests";
+import { useState } from "react";
 import * as Styles from "./Row.styles";
-import { test_movies } from "utils/Debug";
+import { useAppDispatch } from "app/hooks";
+import { setMovie, showPopup } from "../../../movieSlice";
+import { useFetchData } from "hooks/useFetchData";
+import { getTitle } from "utils/getTitle";
 
 interface IProps {
     title: string;
@@ -11,39 +13,27 @@ interface IProps {
 }
 
 function Row(props: IProps) {
-    const [movies, setMovies] = useState<ResultType[]>([]);
     const [movieID, setMovieID] = useState<number>();
     const [showDetails, setShowDetail] = useState(false);
-    const Title = (movie: ResultType) =>
-        movie?.name ||
-        movie?.original_title ||
-        movie?.title ||
-        movie?.original_name;
 
-    //! For Debugging
-    useEffect(() => {
-        console.log("Debugging mode");
-        setMovies(test_movies);
-        console.log(test_movies);
-    }, []);
+    const { movies } = useFetchData(props.fetchUrl);
 
-    // useEffect(() => {
-    //     async function fetchData() {
-    //         const request = await api.get(props.fetchUrl);
-    //         setMovies(request.data.results);
-    //     }
-    //     fetchData();
-    // }, [props.fetchUrl]);
+    const dispatch = useAppDispatch();
 
-    const handleShowDetails = (movie: ResultType) => {
+    const handleShowDetails = (movie: MovieInterface) => {
         if (showDetails && movieID === movie.id)
             return (
                 <>
-                    <h3>{Title(movie)}</h3>
+                    <h3>{getTitle(movie)}</h3>
                     <p>Click to see more Details</p>
                 </>
             );
         else return <></>;
+    };
+
+    const handleClick = (movie: MovieInterface) => {
+        dispatch(setMovie(movie));
+        dispatch(showPopup());
     };
 
     const fetchPosters = () => {
@@ -55,6 +45,7 @@ function Row(props: IProps) {
                     setMovieID(movie.id);
                     setShowDetail(true);
                 }}
+                onClick={() => handleClick(movie)}
                 onMouseLeave={() => {
                     setMovieID(movie.id);
                     setShowDetail(false);

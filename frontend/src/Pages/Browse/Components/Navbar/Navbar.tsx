@@ -5,9 +5,10 @@ import { useState } from "react";
 import { auth } from "utils/Firebase";
 import { signOut, User } from "firebase/auth";
 import { useHistory } from "react-router-dom";
+import avatar from "assets/avatar.png";
 
 interface IProps {
-    user: User | undefined | null;
+    user: User | null;
 }
 
 function Header(props: IProps) {
@@ -56,15 +57,14 @@ function Header(props: IProps) {
             <Styles.Nav>
                 <Styles.Container>
                     <Styles.Logo src={logoSvg} alt="Logo" />
-                    <Styles.Search placeholder="I'm searching for..." />
                     <Styles.Profile onClick={handleClick}>
-                        <Styles.Avatar />
+                        <Styles.Avatar src={avatar} />
                         <Styles.DownArrow src={DownArrow} />
                     </Styles.Profile>
                 </Styles.Container>
                 <Styles.Dropdown isOpen={isOpen}>
                     {checkIfAnonymous()}
-                    </Styles.Dropdown>
+                </Styles.Dropdown>
             </Styles.Nav>
         </>
     );

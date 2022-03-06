@@ -1,19 +1,19 @@
 import styled from "styled-components";
 
-// Header
-export const Header = styled.div`
-    padding-top: 30px;
-    margin: 0 5%;
-    display: flex;
-    justify-content: space-between;
+interface IContainer {
+    StopScroll: boolean;
+}
+
+export const Container = styled.div<IContainer>`
+    height: 100vh;
+    width: 100%;
+    position: relative;
+    overflow: ${(props) => (props.StopScroll ? "hidden" : "auto")};
 `;
 
-export const Logo = styled.img`
-    width: 116px;
-    height: 34px;
-
-    @media (max-width: 700px) {
-        width: 100px;
-        height: 30px;
-    }
+interface MaskProps {
+    blur: boolean;
+}
+export const Mask = styled.div<MaskProps>`
+    filter: blur(${(props) => (props.blur ? 10 : 0)}px);
 `;

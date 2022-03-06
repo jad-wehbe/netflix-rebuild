@@ -1,84 +1,78 @@
-import { useEffect, useState } from "react";
+import { useState } from "react";
 import * as Styles from "./Banner.styles";
-import {ResultType} from "api/requests"
-import { test_movie } from "utils/Debug";
-// import { fetchRuntime, requests, ResultType } from "api/requests";
-// import api from "api/axios";
+import { useTruncate } from "hooks/useTruncate";
+import { getTitle } from "utils/getTitle";
+import { useFetchData } from "hooks/useFetchData";
+import { requests } from "api/requests";
+import { useAppDispatch } from "app/hooks";
+import { setMovie, showPopup } from "Pages/Browse/movieSlice";
 
 function Banner() {
-    const [show, setShow] = useState<ResultType>({});
     const [readMore, setReadMore] = useState(false);
+    const { randMovie } = useFetchData(requests.fetchTrending);
+    const [truncate, showReadMore] = useTruncate(
+        randMovie.overview!,
+        150,
+        readMore
+    );
 
-    // ! For Debugging
-    useEffect(() => {
-        setShow(test_movie);
-    }, []);
+    const Title = getTitle(randMovie);
+    const dispatch = useAppDispatch();
 
-    // useEffect(() => {
-    //     async function fetchData() {
-    //         const request = await api.get(requests.fetchTrending);
-    //         // console.log(request.data.results);
-    //         setShow(
-    //             request.data.results[
-    //                 Math.floor(Math.random() * request?.data.results.length)
-    //             ]
-    //         );
-    //         const runtime = await fetchRuntime(request?.data.results[0].id);
-    //         setShow((prevState) => ({ ...prevState, runtime: runtime }));
-    //     }
-    //     fetchData();
-    // }, []);
+    const ReadMore = (): JSX.Element => {
+        return showReadMore ? (
+            <Styles.Span
+                onClick={() => {
+                    setReadMore(!readMore);
+                }}
+            >
+                {readMore ? "Read Less" : "Read More"}
+            </Styles.Span>
+        ) : (
+            <></>
+        );
+    };
 
-    const handleReadMore = () => {
-        setReadMore(!readMore)
-    }
-
-    function truncate(str: string | undefined, n: number, enable: boolean): string {
-        if (str) {
-            if(str.length > n && !enable) return str.substring(0, n - 1) + "..."
-            else return str;
-        } else return "No overview";
-    }
-
-    const showTitle = show?.name || show?.original_title || show?.title || show?.original_name;
+    const handleClick = () => {
+        dispatch(setMovie(randMovie));
+        dispatch(showPopup());
+    };
 
     return (
         <Styles.Container>
             <Styles.Banner>
                 <Styles.BannerContainer>
-                    <Styles.Title>
-                        {showTitle}
-                    </Styles.Title>
+                    <Styles.Title>{Title}</Styles.Title>
                     <Styles.List>
                         <Styles.ListItem>
-                            {show?.release_date
-                                ? show.release_date.split("-")[0]
+                            {randMovie?.release_date
+                                ? randMovie.release_date.split("-")[0]
                                 : "date not found"}
                         </Styles.ListItem>
                         <Styles.ListItem>
-                            {show?.adult ? "+18" : "PG-G"}
+                            {randMovie?.adult ? "+18" : "PG-G"}
                         </Styles.ListItem>
                         <Styles.ListItem>
-                            Rate: {show?.vote_average}
+                            Rate: {randMovie?.vote_average}/10
                         </Styles.ListItem>
-                        <Styles.ListItem>{show?.runtime} min</Styles.ListItem>
                         <Styles.ListItem>
-                            en-{show?.original_language?.toLocaleUpperCase()}
+                            {randMovie?.runtime} min
+                        </Styles.ListItem>
+                        <Styles.ListItem>
+                            en-
+                            {randMovie?.original_language?.toLocaleUpperCase()}
                         </Styles.ListItem>
                     </Styles.List>
                     <Styles.Overview>
-                        {truncate(show?.overview, 150, readMore)}
-                        <Styles.Span onClick={handleReadMore}>{readMore?"Read Less" : "Read More"}</Styles.Span>
+                        {truncate}
+                        {ReadMore()}
                     </Styles.Overview>
-                    <Styles.ButtonContainer>
-                        <Styles.Button>Play</Styles.Button>
-                        <Styles.Button>My list</Styles.Button>
-                    </Styles.ButtonContainer>
+                    <Styles.Button onClick={handleClick}>Play</Styles.Button>
                 </Styles.BannerContainer>
             </Styles.Banner>
             <Styles.Poster
-                backdrop_path={`https://image.tmdb.org/t/p/original/${show?.backdrop_path}`}
-                poster_path={`https://image.tmdb.org/t/p/original/${show?.poster_path}`}
+                backdrop_path={`https://image.tmdb.org/t/p/original/${randMovie?.backdrop_path}`}
+                poster_path={`https://image.tmdb.org/t/p/original/${randMovie?.poster_path}`}
             />
         </Styles.Container>
     );
