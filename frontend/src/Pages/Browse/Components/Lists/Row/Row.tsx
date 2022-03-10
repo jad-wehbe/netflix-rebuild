@@ -1,5 +1,4 @@
 import { MovieInterface } from "api/requests";
-import { useState } from "react";
 import * as Styles from "./Row.styles";
 import { useAppDispatch } from "app/hooks";
 import { setMovie, showPopup } from "../../../movieSlice";
@@ -13,23 +12,9 @@ interface IProps {
 }
 
 function Row(props: IProps) {
-    const [movieID, setMovieID] = useState<number>();
-    const [showDetails, setShowDetail] = useState(false);
-
     const { movies } = useFetchData(props.fetchUrl);
 
     const dispatch = useAppDispatch();
-
-    const handleShowDetails = (movie: MovieInterface) => {
-        if (showDetails && movieID === movie.id)
-            return (
-                <>
-                    <h3>{getTitle(movie)}</h3>
-                    <p>Click to see more Details</p>
-                </>
-            );
-        else return <></>;
-    };
 
     const handleClick = (movie: MovieInterface) => {
         dispatch(setMovie(movie));
@@ -41,28 +26,21 @@ function Row(props: IProps) {
         return movies.map((movie) => (
             <Styles.Poster
                 key={movie.id}
-                onMouseEnter={() => {
-                    setMovieID(movie.id);
-                    setShowDetail(true);
-                }}
                 onClick={() => handleClick(movie)}
-                onMouseLeave={() => {
-                    setMovieID(movie.id);
-                    setShowDetail(false);
-                }}
                 isLarge={props.isLargeRow}
                 background_path={`${baseURL}${
                     props.isLargeRow ? movie.poster_path : movie.backdrop_path
                 }`}
             >
-                {handleShowDetails(movie)}
+                <Styles.Title>{getTitle(movie)}</Styles.Title>
+                <Styles.Details>Click to see more Details</Styles.Details>
             </Styles.Poster>
         ));
     };
 
     return (
         <Styles.Container>
-            <Styles.H2>{props.title}</Styles.H2>
+            <Styles.Type>{props.title}</Styles.Type>
             <Styles.Posters>{fetchPosters()}</Styles.Posters>
         </Styles.Container>
     );

@@ -30,7 +30,6 @@ export const handleSignUp = async (
         const newUser = userCredential.user;
         await updateProfile(newUser, { displayName: values.username });
         dispatch(loginSuccess(newUser.displayName));
-        // console.log(newUser);
         history.push("/browse");
     } catch (error: any) {
         dispatch(loginFailure);

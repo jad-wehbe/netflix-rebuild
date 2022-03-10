@@ -1,10 +1,13 @@
 import { Helmet } from "react-helmet";
+import { useEffect } from "react";
 import { Link } from "react-router-dom";
 import { useFormik } from "formik";
 
 import * as Styles from "./SignIn.styles";
 import logoSvg from "assets/Logo.svg";
 
+import { onAuthStateChanged } from "firebase/auth";
+import { auth } from "utils/Firebase";
 import { signInValidation } from "utils/validation";
 import handleSignIn from "api/handleSignIn";
 
@@ -14,6 +17,14 @@ import { useHistory } from "react-router-dom";
 function SignIn() {
     const dispatch = useAppDispatch();
     const history = useHistory();
+
+    useEffect(() => {
+        const unsubscribe = onAuthStateChanged(auth, (user) => {
+            if (user && !user.isAnonymous) history.push("/Browse");
+        });
+        return () => unsubscribe();
+    }, [history]);
+
     const formik = useFormik({
         initialValues: {
             email: "",
@@ -58,7 +69,9 @@ function SignIn() {
                         />
 
                         {formik.touched.password && formik.errors.password ? (
-                            <Styles.Error>{formik.errors.password}</Styles.Error>
+                            <Styles.Error>
+                                {formik.errors.password}
+                            </Styles.Error>
                         ) : null}
 
                         <Styles.Input
@@ -71,10 +84,9 @@ function SignIn() {
                             value={formik.values.password}
                         />
 
-                        <Styles.SignInButton type="submit">SignIn</Styles.SignInButton>
-                        <Styles.ForgetPassword>
-                            <Link to="#">Forget Password?</Link>
-                        </Styles.ForgetPassword>
+                        <Styles.SignInButton type="submit">
+                            SignIn
+                        </Styles.SignInButton>
                         <Styles.Paragraph>
                             New to Netflix?
                             <Styles.Span>

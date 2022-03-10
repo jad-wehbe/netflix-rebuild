@@ -1,9 +1,11 @@
-import { BrowserRouter as Router, Switch, Route, Redirect } from "react-router-dom";
+import {
+    BrowserRouter as Router,
+    Switch,
+    Route,
+    Redirect,
+} from "react-router-dom";
 
-import Landing from "Pages/Landing/Landing";
-import SignIn from "Pages/SignIn/SignIn";
-import Browse from "Pages/Browse/Browse";
-import SignUp from "Pages/SignUp/SignUp";
+import { Landing, SignIn, SignUp, Browse } from "Pages";
 
 import "./App.css";
 
@@ -13,9 +15,9 @@ function App() {
             <Router>
                 <Switch>
                     <Route path="/" component={Landing} exact />
-                    <Route path="/signIn" component={SignIn} exact />
-                    <Route path="/signUp" component={SignUp} exact />
-                    <Route path="/browse" component={Browse} exact />
+                    <Route path="/SignIn" component={SignIn} exact />
+                    <Route path="/SignUp" component={SignUp} exact />
+                    <Route path="/Browse" component={Browse} exact />
                     <Redirect to="/" />
                 </Switch>
             </Router>

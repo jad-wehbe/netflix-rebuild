@@ -16,7 +16,7 @@ export const Banner = styled.div`
     width: 55%;
     color: white;
     height: 100%;
-    padding-left: 10%;
+    padding-left: 8%;
     background: linear-gradient(
         89.99deg,
         #0b0b0b 0.01%,
@@ -39,26 +39,24 @@ export const BannerContainer = styled.div`
     display: flex;
     flex-direction: column;
     justify-content: space-around;
+    align-items: center;
 
     @media (max-width: 768px) {
         width: 100%;
         background: none;
+        align-items: center;
     }
 `;
 
 export const Title = styled.h2`
     font-size: 4rem;
     font-weight: 800;
-
-    @media (max-width: 1280px) {
-        font-size: 3rem;
-    }
+    text-align: center;
 
     @media (max-width: 1024px) {
         font-size: 2rem;
         font-weight: bold;
-        text-decoration: underline;
-        margin: 1rem;
+        margin-bottom: 2rem;
     }
 `;
 
@@ -73,22 +71,23 @@ export const List = styled.ul`
 export const ListItem = styled.li`
     display: inline-block;
     padding-right: 2rem;
-    padding-bottom: 1rem;
     font-size: 1rem;
     color: #b2b2b2;
 
     @media (max-width: 1024px) {
         padding-right: 1rem;
+        font-size: 0.9rem;
     }
 `;
 
 export const Overview = styled.p`
     color: #b2b2b2;
+    text-align: justify;
 
     @media (max-width: 1024px) {
         width: 90%;
-        margin-left: 1rem;
-        margin-bottom: 2rem;
+        margin: 2rem 0;
+        font-size: 0.9rem;
     }
 `;
 
@@ -118,7 +117,6 @@ export const Button = styled.button`
     padding: 1rem 4rem;
 
     @media (max-width: 1280px) {
-        flex: 1;
         width: 80%;
         margin-bottom: 1rem;
     }
@@ -154,6 +152,6 @@ export const Poster = styled.div<path>`
         background-position: center center;
         object-fit: contain;
         z-index: -10;
-        margin-bottom: -60px;
+        margin-bottom: -50px;
     }
 `;

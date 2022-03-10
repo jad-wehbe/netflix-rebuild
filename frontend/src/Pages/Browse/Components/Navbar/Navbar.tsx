@@ -28,7 +28,7 @@ function Header(props: IProps) {
 
     const checkIfAnonymous = () => {
         const handleLogin = () => {
-            history.push("/signIn");
+            history.push("/SignIn");
         };
 
         if (props.user?.isAnonymous) {

@@ -1,3 +1,4 @@
+import { useEffect } from "react";
 import { Helmet } from "react-helmet";
 import { Link, useHistory } from "react-router-dom";
 import { useDispatch } from "react-redux";
@@ -7,14 +8,21 @@ import { addEmail } from "./landingSlice";
 import logoSvg from "assets/Logo.svg";
 import * as Styles from "./Landing.Styles";
 
+import { onAuthStateChanged } from "firebase/auth";
+import { auth } from "utils/Firebase";
 import { emailValidation } from "utils/validation";
 import handleAnonymous from "api/handleAnonymous";
 
 function Landing() {
-    // const [redirect, setRedirect] = useState(false);
-
     const dispatch = useDispatch();
     const history = useHistory();
+
+    useEffect(() => {
+        const unsubscribe = onAuthStateChanged(auth, (user) => {
+            if (user && !user.isAnonymous) history.push("/Browse");
+        });
+        return () => unsubscribe();
+    }, [history]);
 
     const formik = useFormik({
         initialValues: {
@@ -23,14 +31,13 @@ function Landing() {
         validationSchema: emailValidation,
 
         onSubmit: (values) => {
-            // console.log(JSON.stringify(values, null, 2));
             dispatch(addEmail(values.email));
             history.push("/SignUp");
         },
     });
 
     const handleClick = () => {
-        handleAnonymous().then(() => history.push("/browse"));
+        handleAnonymous().then(() => history.push("/Browse"));
     };
 
     return (
@@ -46,10 +53,15 @@ function Landing() {
                     </Link>
                 </Styles.Header>
                 <Styles.Main>
-                    <Styles.Title>Unlimited movies, TV shows, and more.</Styles.Title>
-                    <Styles.SubTitle>Watch anywhere. Cancel anytime</Styles.SubTitle>
+                    <Styles.Title>
+                        Unlimited movies, TV shows, and more.
+                    </Styles.Title>
+                    <Styles.SubTitle>
+                        Watch anywhere. Cancel anytime
+                    </Styles.SubTitle>
                     <Styles.Paragraph>
-                        <Styles.Span>Ready to watch?</Styles.Span> Enter your Email:
+                        <Styles.Span>Ready to watch?</Styles.Span> Enter your
+                        Email:
                     </Styles.Paragraph>
 
                     {formik.touched.email && formik.errors.email ? (
@@ -73,9 +85,12 @@ function Landing() {
                     </Styles.SignUp>
 
                     <Styles.Terms>
-                        Entering your email will create or restart your membership
+                        Entering your email will create or restart your
+                        membership
                     </Styles.Terms>
-                    <Styles.Guest onClick={handleClick}>Continue as a Guest</Styles.Guest>
+                    <Styles.Guest onClick={handleClick}>
+                        Continue as a Guest
+                    </Styles.Guest>
                 </Styles.Main>
             </Styles.Background>
         </>

@@ -1,6 +1,6 @@
 import api from "./axios";
 
-//! NOT SECURE AT ALL
+//! NOT SECURE
 const API_KEY = "e3c57b0030cdf2d733c59f17dfe98759";
 
 export interface MovieInterface {
@@ -57,7 +57,9 @@ interface results {
 
 export const fetchMovieTrailer = async (id: number) => {
     try {
-        const res = await api.get<results>(`/movie/${id}/videos?api_key=${API_KEY}`);
+        const res = await api.get<results>(
+            `/movie/${id}/videos?api_key=${API_KEY}`
+        );
         return res.data.results;
     } catch (err) {
         console.error(err);

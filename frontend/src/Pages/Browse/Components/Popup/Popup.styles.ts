@@ -16,27 +16,24 @@ export const Popup = styled.div<IPopup>`
     background-color: #090909;
     border-radius: 10px;
     color: white;
+    overflow: auto;
 `;
 
 export const PopupContainer = styled.div`
     width: 100%;
     height: 100%;
+    min-height: 700px;
     position: relative;
-
-    overflow-x: hidden;
-    overflow-y: scroll;
-
-    &::-webkit-scrollbar {
-        display: none;
-    }
 `;
 
 export const MovieContainer = styled.div`
     height: 40%;
+    min-height: 400px;
     display: flex;
 
     @media (max-width: 768px) {
         flex-direction: column-reverse;
+        justify-content: flex-end;
     }
 `;
 
@@ -47,6 +44,7 @@ export const Details = styled.div`
     display: flex;
     flex-direction: column;
     justify-content: center;
+    align-items: center;
 
     @media (max-width: 768px) {
         padding: 0;
@@ -56,14 +54,12 @@ export const Details = styled.div`
 
 export const Title = styled.h1`
     font-size: 3rem;
-    margin: 1rem;
-    margin-right: 0rem;
+    margin: 1rem 0 2rem 0;
+    text-align: center;
 
-    @media (max-width: 768px) {
-        text-align: center;
+    @media (max-width: 1024px) {
         font-size: 2rem;
         font-weight: bold;
-        text-decoration: underline;
     }
 `;
 
@@ -78,16 +74,21 @@ export const ListItem = styled.li`
     padding-bottom: 1rem;
     font-size: 1rem;
     color: #b2b2b2;
+
+    @media (max-width: 1024px) {
+        padding-right: 1rem;
+        font-size: 0.9rem;
+    }
 `;
 export const Overview = styled.p`
-    margin-left: 1rem;
+    margin-top: 1rem;
     color: #b2b2b2;
+    text-align: justify;
 
     @media (max-width: 1024px) {
         width: 90%;
-        margin-left: 1rem;
-        margin-bottom: 2rem;
-    }
+        margin: 1rem 0;
+        font-size: 0.9rem;
 `;
 
 export const Span = styled.span`
@@ -132,7 +133,7 @@ export const CloseButton = styled.button`
     height: 50px;
     cursor: pointer;
     border: none;
-    background: grey;
+    background: lightGrey;
     border-radius: 0 0 0 100%;
     z-index: 30;
 `;

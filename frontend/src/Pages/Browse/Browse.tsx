@@ -6,16 +6,12 @@ import { auth } from "utils/Firebase";
 import { useAppSelector } from "app/hooks";
 import { Popup, Header, Banner, Lists } from "./Components";
 import * as Styles from "./Browse.styles";
-//import { test_movie } from "utils/Debug";
 
 function Browse() {
     const [user, setUser] = useState<User | null>(null);
 
     const movie = useAppSelector((state) => state.movie.movie);
     const open = useAppSelector((state) => state.movie.popup);
-    // For Debugging Onlyy !!!
-    //const movie = test_movie;
-    //const open = true;
 
     const history = useHistory();
 

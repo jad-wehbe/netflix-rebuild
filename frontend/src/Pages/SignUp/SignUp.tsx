@@ -6,6 +6,8 @@ import { useFormik } from "formik";
 import logoSvg from "assets/Logo.svg";
 import * as Styles from "./SignUp.styles";
 
+import { onAuthStateChanged } from "firebase/auth";
+import { auth } from "utils/Firebase";
 import { signUpValidation } from "utils/validation";
 import { useAppSelector } from "app/hooks";
 import { handleSignUp } from "api/handleSignUp";
@@ -16,6 +18,13 @@ function SignUp() {
     const dispatch = useAppDispatch();
     const history = useHistory();
     const [exist, setExist] = useState(false);
+
+    useEffect(() => {
+        const unsubscribe = onAuthStateChanged(auth, (user) => {
+            if (user && !user.isAnonymous) history.push("/Browse");
+        });
+        return () => unsubscribe();
+    }, [history]);
 
     // Check if we have an email entered in Landing page
     const emailState = useAppSelector((state) => state.email.email);
@@ -58,7 +67,9 @@ function SignUp() {
                         <Styles.H2>Sign Up</Styles.H2>
 
                         {formik.touched.username && formik.errors.username ? (
-                            <Styles.Error>{formik.errors.username}</Styles.Error>
+                            <Styles.Error>
+                                {formik.errors.username}
+                            </Styles.Error>
                         ) : null}
 
                         <Styles.Input
@@ -88,7 +99,9 @@ function SignUp() {
                         />
 
                         {formik.touched.password && formik.errors.password ? (
-                            <Styles.Error>{formik.errors.password}</Styles.Error>
+                            <Styles.Error>
+                                {formik.errors.password}
+                            </Styles.Error>
                         ) : null}
 
                         <Styles.Input
@@ -101,8 +114,11 @@ function SignUp() {
                             value={formik.values.password}
                         />
 
-                        {formik.touched.verifyPassword && formik.errors.verifyPassword ? (
-                            <Styles.Error>{formik.errors.verifyPassword}</Styles.Error>
+                        {formik.touched.verifyPassword &&
+                        formik.errors.verifyPassword ? (
+                            <Styles.Error>
+                                {formik.errors.verifyPassword}
+                            </Styles.Error>
                         ) : null}
 
                         <Styles.Input
@@ -115,7 +131,9 @@ function SignUp() {
                             value={formik.values.verifyPassword}
                         />
 
-                        <Styles.SignInButton type="submit">Sign Up</Styles.SignInButton>
+                        <Styles.SignInButton type="submit">
+                            Sign Up
+                        </Styles.SignInButton>
 
                         <Styles.Paragraph>
                             Already have an account?

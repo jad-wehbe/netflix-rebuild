@@ -89,17 +89,6 @@ export const SignInButton = styled.button`
     cursor: pointer;
 `;
 
-export const ForgetPassword = styled.p`
-    margin-top: 0.5rem;
-    font-size: 1rem;
-    text-align: right;
-    color: #737373;
-
-    &:hover {
-        text-decoration: underline;
-    }
-`;
-
 export const Paragraph = styled.p`
     margin-top: 4rem;
     color: #737373;
