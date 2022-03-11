@@ -1,6 +1,7 @@
 # Netflix Rebuild
 ## Description
 Welcome to my version of Netflix clone that is better than any other clone 😉 with improvment in styles and adding more fuctionality
+
 **+Fetching all the data from [TMDB API](https://developers.themoviedb.org/3)!!!**
 
 #### Please check it out 👉🏻👉🏻 [Click Here](https://netflix-clone-v2-114d8.web.app/)
