@@ -4,7 +4,7 @@ Welcome to my version of Netflix clone that is better than any other clone 😉 
 
 **+Fetching all the data from [TMDB API](https://developers.themoviedb.org/3)!!!**
 
-#### Please check it out 👉🏻👉🏻 [Click Here](https://netflix-clone-v2-114d8.web.app/)
+#### Please check it out 👉🏻👉🏻 [Visit Website](https://netflix-clone-v2-114d8.web.app/)
 
 ## Stack I Used
  **Front-End:** ReactJs + TypeScript - Redux - Styled Component - Yup - Formik and many other
